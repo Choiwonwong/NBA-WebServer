@@ -33,6 +33,7 @@ body {
     color: #333;
     letter-spacing: 2px;
 }
+
 .quest-noti .highlight {
     color: #007bffc8;
     /* 파란색으로 강조할 색상 */
@@ -113,9 +114,11 @@ body {
 }
 
 .divider {
-  border-top: 1px solid #ccc; /* 수평선 스타일 정의 */
-  margin: 16px 0; /* 위아래 여백 조정 (선택사항) */
-  width: 30%;
+    border-top: 1px solid #ccc;
+    /* 수평선 스타일 정의 */
+    margin: 16px 0;
+    /* 위아래 여백 조정 (선택사항) */
+    width: 30%;
 }
 
 .request-list-button {

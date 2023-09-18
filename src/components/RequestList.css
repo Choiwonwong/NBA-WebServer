@@ -35,6 +35,8 @@ body {
     width: 60%;
     border-collapse: collapse;
     margin-top: 2rem;
+    border: 1px solid #ddd;
+    /* 테두리 스타일과 색상 설정 */
 }
 
 .request-table th,
@@ -42,6 +44,8 @@ body {
     padding: 12px 20px;
     text-align: left;
     text-decoration: none;
+    border: 1px solid #ddd;
+    /* 테두리 스타일과 색상 설정 */
 }
 
 .request-table th {
@@ -54,9 +58,9 @@ body {
     background-color: #f2f2f2;
 }
 
-.request-table-row:hover {
+/* .request-table-row:hover {
     background-color: #e0e0e0;
-}
+} */
 
 .request-list-link {
     text-decoration: none;

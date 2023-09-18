@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import './Main.css';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import "./Main.css";
 
 function Main() {
   const [formState, setFormState] = useState({
-    githubRepo: '',
-    githubBranch: '',
-    accessKey: '',
-    secretKey: '',
+    githubRepo: "",
+    githubBranch: "",
+    accessKey: "",
+    secretKey: "",
     showSecret: false,
   });
   const [validRepoUrl, setValidRepoUrl] = useState(true);
@@ -22,9 +22,9 @@ function Main() {
       [name]: value,
     }));
 
-    if (name === 'githubRepo') {
+    if (name === "githubRepo") {
       const repoUrlPattern = /^https:\/\/github\.com\/\S+\/\S+$/;
-      const isValidRepoUrl = value === '' || repoUrlPattern.test(value);
+      const isValidRepoUrl = value === "" || repoUrlPattern.test(value);
       setValidRepoUrl(isValidRepoUrl);
     } else {
       // GitHub Repo를 지웠을 때, 다시 입력 가능하도록 제약 조건 해제
@@ -61,12 +61,18 @@ function Main() {
         QUEST
       </Link>
       <p className="quest-noti">
-        <span className="highlight">Q</span>uick <span className="highlight">U</span>nified <span className="highlight">E</span>asy <span className="highlight">S</span>imple <span className="highlight">T</span>ool
+        <span className="highlight">Q</span>uick{" "}
+        <span className="highlight">U</span>nified{" "}
+        <span className="highlight">E</span>asy{" "}
+        <span className="highlight">S</span>imple{" "}
+        <span className="highlight">T</span>ool
       </p>
 
       <div className="divider"></div>
 
-      <p className="quest-text">Build & Provision & Deploy Integration Service</p>
+      <p className="quest-text">
+        Build & Provision & Deploy Integration Service
+      </p>
 
       <div className="input-field">
         <label htmlFor="githubRepo">GitHub Repo</label>
@@ -77,9 +83,11 @@ function Main() {
           value={formState.githubRepo}
           onChange={handleChange}
           placeholder="Please Enter GitHub Repo"
-          className={!validRepoUrl ? 'invalid' : ''}
+          className={!validRepoUrl ? "invalid" : ""}
         />
-        {!validRepoUrl && formState.githubRepo !== '' && <p className="error-message">Invalid GitHub Repo URL</p>}
+        {!validRepoUrl && formState.githubRepo !== "" && (
+          <p className="error-message">Invalid GitHub Repo URL</p>
+        )}
       </div>
 
       {/* Github Branch 입력 필드 */}
@@ -93,7 +101,7 @@ function Main() {
           onChange={handleChange}
           placeholder="Please Enter Branch Name"
           disabled={isFieldsDisabled}
-          className={isFieldsDisabled ? 'disabled' : ''}
+          className={isFieldsDisabled ? "disabled" : ""}
         />
       </div>
 
@@ -108,7 +116,7 @@ function Main() {
           onChange={handleChange}
           placeholder="Please Enter Access Key"
           disabled={isFieldsDisabled}
-          className={isFieldsDisabled ? 'disabled' : ''}
+          className={isFieldsDisabled ? "disabled" : ""}
         />
       </div>
 
@@ -116,21 +124,29 @@ function Main() {
       <div className="input-field">
         <label htmlFor="secretKey">Secret Key</label>
         <input
-          type={formState.showSecret ? 'text' : 'password'}
+          type={formState.showSecret ? "text" : "password"}
           id="secretKey"
           name="secretKey"
           value={formState.secretKey}
           onChange={handleChange}
           placeholder="Please Enter Secret Key"
           disabled={isFieldsDisabled}
-          className={isFieldsDisabled ? 'disabled' : ''}
+          className={isFieldsDisabled ? "disabled" : ""}
         />
       </div>
-      <button className="show-secret-button" onClick={toggleShowSecret} disabled={isFieldsDisabled}>
+      <button
+        className="show-secret-button"
+        onClick={toggleShowSecret}
+        disabled={isFieldsDisabled}
+      >
         <FontAwesomeIcon icon={formState.showSecret ? faEye : faEyeSlash} />
       </button>
       <div className="divider"></div>
-      <button className="request-button" onClick={handleRequestClick} disabled={isFieldsDisabled}>
+      <button
+        className="request-button"
+        onClick={handleRequestClick}
+        disabled={isFieldsDisabled}
+      >
         Request
       </button>
 

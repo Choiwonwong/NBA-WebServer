@@ -1,0 +1,68 @@
+/* src/components/RequestList.css */
+
+body {
+    background-color: #f7f7f7;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    padding: 0;
+}
+
+.quest-noti,
+.quest-text {
+    font-size: 2rem;
+    margin: 1.5rem 0;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    letter-spacing: 2px;
+}
+
+.quest-noti .highlight {
+    color: #007bff;
+}
+
+.quest-text {
+    font-size: 1.5rem;
+}
+
+.request-table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.request-table th,
+.request-table td {
+    padding: 12px 20px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.request-table th {
+    background-color: #007bff;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.request-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.request-table-row:hover {
+    background-color: #e0e0e0;
+}
+
+.request-list-link {
+    text-decoration: none;
+    color: black;
+}
+
+.request-list-link:hover {
+    text-decoration: underline;
+}

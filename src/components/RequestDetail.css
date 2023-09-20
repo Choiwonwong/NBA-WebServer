@@ -83,7 +83,7 @@ body {
 }
 
 .post h3 {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     margin: 10px 0 10px;
     /* 위쪽 여백 20px, 아래쪽 여백 10px */
     color: #333;
@@ -93,7 +93,7 @@ body {
 }
 
 .post p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #666;
     margin-top: 30px;
     word-break: break-word;

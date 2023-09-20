@@ -28,6 +28,7 @@ function Main() {
   const isValidGitHubRepo = (value) => {
     const repoUrlPattern =
       /^(https:\/\/|http:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+.git$/;
+
     return value === "" || repoUrlPattern.test(value);
   };
 

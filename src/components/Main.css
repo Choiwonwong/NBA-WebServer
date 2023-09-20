@@ -98,7 +98,7 @@ body {
 .request-button {
     background-color: #007bff;
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.75rem;
     /* 폰트 크기를 늘립니다. */
     padding: 1rem 2rem;
     /* 내부 여백을 늘립니다. */
@@ -125,9 +125,9 @@ body {
     display: block;
     width: 30%;
     /* 가로 크기 조정 */
-    font-size: 2.5rem;
+    font-size: 2rem;
     /* 폰트 크기 조정 */
-    padding: 20px;
+    padding: 15px;
     /* 내부 여백 조정 */
     background-color: #007bff;
     color: #fff;

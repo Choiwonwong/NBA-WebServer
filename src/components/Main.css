@@ -150,3 +150,30 @@ body {
     text-align: center;
     font-weight: bold;
 }
+
+/* CSS 클래스를 추가하여 흔들기 애니메이션을 정의합니다. */
+.shake {
+    animation: shake 0.2s ease-in-out;
+    animation-iteration-count: 2;
+    /* 2회 반복하도록 설정 */
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+        /* 원래 위치로 돌아가는 상태 */
+    }
+
+    25%,
+    75% {
+        transform: translateX(-10px);
+        /* 왼쪽으로 흔들기 */
+    }
+
+    50% {
+        transform: translateX(10px);
+        /* 오른쪽으로 흔들기 */
+    }
+}

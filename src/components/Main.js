@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { confirmAlert } from "react-confirm-alert";
+// import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import swal from "sweetalert";
 import "./Main.css";
 
 function Main() {
@@ -43,29 +44,53 @@ function Main() {
   };
 
   const showConfirmationAlert = () => {
-    confirmAlert({
+    swal({
       title: "Confirm Request",
-      message: "Are you sure you want to make this request?",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => {
-            const requestData = {
-              githubRepo: formState.githubRepo,
-              githubBranch: formState.githubBranch,
-              accessKey: formState.accessKey,
-              secretKey: formState.secretKey,
-            };
-            setRequestData(requestData);
-          },
-        },
-        {
-          label: "No",
-          onClick: () => {},
-        },
-      ],
+      text: "Are you sure you want to make this request?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Great! Please Wait For A Moment", {
+          icon: "success",
+        });
+        const requestData = {
+          githubRepo: formState.githubRepo,
+          githubBranch: formState.githubBranch,
+          accessKey: formState.accessKey,
+          secretKey: formState.secretKey,
+        };
+        setRequestData(requestData);
+      } else {
+        swal("Cancle Request");
+      }
     });
   };
+  // const showConfirmationAlert = () => {
+  //   confirmAlert({
+  //     title: "Confirm Request",
+  //     message: "Are you sure you want to make this request?",
+  //     buttons: [
+  //       {
+  //         label: "Yes",
+  //         onClick: () => {
+  // const requestData = {
+  //   githubRepo: formState.githubRepo,
+  //   githubBranch: formState.githubBranch,
+  //   accessKey: formState.accessKey,
+  //   secretKey: formState.secretKey,
+  // };
+  // setRequestData(requestData);
+  //         },
+  //       },
+  //       {
+  //         label: "No",
+  //         onClick: () => {},
+  //       },
+  //     ],
+  //   });
+  // };
 
   const toggleShowSecret = () => {
     setFormState((prevState) => ({
@@ -91,7 +116,12 @@ function Main() {
     const { isAnyFieldEmpty, isGitHubRepoValid } = validateForm();
 
     if (isAnyFieldEmpty) {
-      alert("Please fill in all fields");
+      // alert("Please Fill In All Fields");
+      swal("Please Fill In All Fields", {
+        button: false,
+        icon: "warning",
+        timer: 3000,
+      });
 
       setTimeout(() => {
         setShakeFields({
@@ -108,14 +138,19 @@ function Main() {
             accessKey: false,
             secretKey: false,
           });
-        }, 2000);
+        }, 500);
       }, 100);
 
       return;
     }
 
     if (!isGitHubRepoValid) {
-      alert("Invalid GitHub Repo URL");
+      // alert("Invalid GitHub Repo URL");
+      swal("Invalid GitHub Repo URL", {
+        button: false,
+        icon: "warning",
+        timer: 3000,
+      });
 
       setShakeFields({
         ...shakeFields,

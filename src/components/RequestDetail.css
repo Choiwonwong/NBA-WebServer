@@ -25,26 +25,15 @@ body {
 }
 
 /* 포스트 스타일 추가 */
-.post-container-1th {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 70%
-}
-
-.post-container-2th {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 70%
-}
-
+.post-container-1th,
+.post-container-2th,
 .post-container-3th {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     width: 70%
 }
+
 
 .post {
     flex: 1;

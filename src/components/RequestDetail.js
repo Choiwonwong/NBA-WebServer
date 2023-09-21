@@ -52,57 +52,52 @@ function RequestDetail() {
         <span className="highlight">T</span>ool
       </p>
       <div className="divider"></div>
-
-      {/* 인프라 상세 정보 제목 */}
       <h2 className="quest-noti">Request Detail</h2>
 
-      {/* 포스트 스타일로 정보 표시 */}
-      <div className="post-container-1th">
-        <div className="post post-id">
-          <h3>ID</h3>
-          <div className="post-divider"></div>
-          <p>{request.id}</p>
-        </div>
-        <div className="post post-title">
-          <h3>Title</h3>
-          <div className="post-divider"></div>
-          <p>{request.title}</p>
-        </div>
-        <div className="post post-created-at">
-          <h3>Created At</h3>
-          <div className="post-divider"></div>
-          <p>{formatDateTime(request.createdAt)}</p>
-        </div>
-        <div className="post post-updated-at">
-          <h3>Updated At</h3>
-          <div className="post-divider"></div>
-          <p>{formatDateTime(request.updatedAt)}</p>
-        </div>
-      </div>
-      <div className="post-container-2th">
-        <div className="post post-progress">
-          <h3>Progress</h3>
-          <div className="post-divider"></div>
-          <p>{request.state}</p>
-        </div>
-        <div className="post post-error-message">
-          <h3>Error Message</h3>
-          <div className="post-divider"></div>
-          <p>{request.emessage || "N/A"}</p>
-        </div>
-      </div>
-      <div className="post-container-3th">
-        <div className="post post-branch">
-          <h3>Branch</h3>
-          <div className="post-divider"></div>
-          <p>{request.branch}</p>
-        </div>
-        <div className="post post-github-repo">
-          <h3>Github Repo</h3>
-          <div className="post-divider"></div>
-          <p>{request.repo}</p>
-        </div>
-      </div>
+      <div className="table-title">Request Info</div>
+      <table className="detail-table metadata-table">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td>{request.id}</td>
+          </tr>
+          <tr>
+            <th>Title</th>
+            <td>{request.title}</td>
+          </tr>
+          <tr>
+            <th>Created At</th>
+            <td>{formatDateTime(request.createdAt)}</td>
+          </tr>
+          <tr>
+            <th>Updated At</th>
+            <td>{formatDateTime(request.updatedAt)}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* Results Table */}
+      <div className="table-title">Results</div>
+      <table className="detail-table results-table">
+        <tbody>
+          <tr>
+            <th>Progress</th>
+            <td>{request.state}</td>
+          </tr>
+          <tr>
+            <th>Error Message</th>
+            <td>{request.emessage || "N/A"}</td>
+          </tr>
+          <tr>
+            <th>Branch</th>
+            <td>{request.branch}</td>
+          </tr>
+          <tr>
+            <th>Github Repo</th>
+            <td>{request.repo}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }

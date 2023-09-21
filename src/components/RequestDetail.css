@@ -1,5 +1,6 @@
 /* src/components/RequestDetail.css */
 
+/* Global Styles */
 body {
     background-color: #f7f7f7;
     margin: 0;
@@ -14,8 +15,7 @@ body {
     padding: 20px;
 }
 
-.quest-noti,
-.quest-text {
+.quest-noti {
     font-size: 2rem;
     margin: 1.5rem 0;
     font-weight: bold;
@@ -24,17 +24,68 @@ body {
     letter-spacing: 2px;
 }
 
-/* 포스트 스타일 추가 */
-.post-container-1th,
-.post-container-2th,
-.post-container-3th {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 70%
+.quest-text {
+    font-size: 2rem;
+    /* margin: 1.5rem 0; */
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    letter-spacing: 2px;
 }
 
+.table-title {
+    font-size: 1.5rem;
+    margin: 1rem 0 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
 
+/* Table Styles */
+.detail-table {
+    width: 60%;
+    margin: 0 0 1rem;
+    border-collapse: collapse;
+}
+
+.detail-table th,
+.detail-table td {
+    padding: 12px;
+    padding-left: 2%;
+    text-align: left;
+    text-decoration: none;
+    border: 1px solid #ddd;
+}
+
+.detail-table th {
+    background-color: #007bff;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.detail-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Metadata Table Styles */
+/* .metadata-table {
+} */
+
+.metadata-table th {
+    /* Add specific styles for metadata table headers here */
+    width: 20%;
+}
+
+/* Results Table Styles */
+/* .results-table {
+} */
+
+.results-table th {
+    width: 25%;
+
+}
+
+/* Post Styles */
 .post {
     flex: 1;
     background-color: #fff;
@@ -46,42 +97,11 @@ body {
     text-align: center;
 }
 
-.post.post-id {
-    flex-basis: 10%;
-}
-
-.post.post-title {
-    flex-basis: 15%;
-}
-
-.post.post-created-at,
-.post.post-updated-at {
-    flex-basis: 25%;
-}
-
-.post.post-progress {
-    flex-basis: 10%;
-}
-
-.post.post-error-message {
-    flex-basis: 60%;
-}
-
-.post.post-branch {
-    flex-basis: 10%;
-}
-
-.post.post-github-repo {
-    flex-basis: 60%;
-}
-
 .post h3 {
     font-size: 1.4rem;
     margin: 10px 0 10px;
-    /* 위쪽 여백 20px, 아래쪽 여백 10px */
     color: #333;
     text-align: center;
-    /* 중앙 정렬 추가 */
     position: relative;
 }
 
@@ -90,31 +110,6 @@ body {
     color: #666;
     margin-top: 30px;
     word-break: break-word;
-    /* 긴 텍스트가 넘칠 경우 줄 바꿈 처리 */
-}
-
-.request-detail-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 2rem;
-}
-
-.request-detail-table th,
-.request-detail-table td {
-    padding: 12px;
-    text-align: left;
-    text-decoration: none;
-    border: 1px solid #ddd;
-}
-
-.request-detail-table th {
-    background-color: #007bff;
-    color: #fff;
-    text-transform: uppercase;
-}
-
-.request-detail-table tr:nth-child(even) {
-    background-color: #f2f2f2;
 }
 
 .post-divider {
@@ -122,5 +117,4 @@ body {
     height: 1px;
     background-color: #ddd;
     margin: 10px auto;
-    /* 위쪽 여백 20px, 아래쪽 여백 20px */
 }

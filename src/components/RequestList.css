@@ -41,7 +41,7 @@ body {
 .request-table th,
 .request-table td {
     padding: 12px 20px;
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     border: 1px solid #ddd;
     /* 테두리 스타일과 색상 설정 */

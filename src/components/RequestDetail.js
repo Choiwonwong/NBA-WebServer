@@ -19,6 +19,7 @@ function formatDateTime(dateTimeString) {
 // 임시로 하드코딩된 상세 페이지 데이터
 const requestDetailData = {
   id: 1,
+  title: "test1",
   repo: "https://github.com/CHOIWONWENG/test0531.git",
   branch: "main",
   state: "프로비저닝 중",
@@ -61,6 +62,11 @@ function RequestDetail() {
           <h3>ID</h3>
           <div className="post-divider"></div>
           <p>{request.id}</p>
+        </div>
+        <div className="post post-title">
+          <h3>Title</h3>
+          <div className="post-divider"></div>
+          <p>{request.title}</p>
         </div>
         <div className="post post-created-at">
           <h3>Created At</h3>

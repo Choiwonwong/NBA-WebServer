@@ -9,6 +9,7 @@ import "./Main.css";
 
 function Main() {
   const [formState, setFormState] = useState({
+    requestTitle: "",
     githubRepo: "",
     githubBranch: "",
     accessKey: "",
@@ -19,6 +20,7 @@ function Main() {
   const [validRepoUrl, setValidRepoUrl] = useState(true);
   const [requestData, setRequestData] = useState(null);
   const [shakeFields, setShakeFields] = useState({
+    requestTitle: false,
     githubRepo: false,
     githubBranch: false,
     accessKey: false,
@@ -34,6 +36,7 @@ function Main() {
 
   const validateForm = () => {
     const isAnyFieldEmpty =
+      formState.requestTitle === "" ||
       formState.githubRepo === "" ||
       formState.githubBranch === "" ||
       formState.accessKey === "" ||
@@ -57,6 +60,7 @@ function Main() {
           icon: "success",
         });
         const requestData = {
+          requestTitle: formState.requestTitle,
           githubRepo: formState.githubRepo,
           githubBranch: formState.githubBranch,
           accessKey: formState.accessKey,
@@ -68,30 +72,6 @@ function Main() {
       }
     });
   };
-  // const showConfirmationAlert = () => {
-  //   confirmAlert({
-  //     title: "Confirm Request",
-  //     message: "Are you sure you want to make this request?",
-  //     buttons: [
-  //       {
-  //         label: "Yes",
-  //         onClick: () => {
-  // const requestData = {
-  //   githubRepo: formState.githubRepo,
-  //   githubBranch: formState.githubBranch,
-  //   accessKey: formState.accessKey,
-  //   secretKey: formState.secretKey,
-  // };
-  // setRequestData(requestData);
-  //         },
-  //       },
-  //       {
-  //         label: "No",
-  //         onClick: () => {},
-  //       },
-  //     ],
-  //   });
-  // };
 
   const toggleShowSecret = () => {
     setFormState((prevState) => ({
@@ -116,7 +96,7 @@ function Main() {
   const handleRequestClick = () => {
     const { isAnyFieldEmpty, isGitHubRepoValid } = validateForm();
 
-    if (isAnyFieldEmpty) {
+    if (isAnyFieldEmpty || !isGitHubRepoValid) {
       // alert("Please Fill In All Fields");
       swal("Please Fill In All Fields", {
         button: false,
@@ -126,7 +106,8 @@ function Main() {
 
       setTimeout(() => {
         setShakeFields({
-          githubRepo: formState.githubRepo === "",
+          requestTitle: formState.requestTitle === "",
+          githubRepo: !isGitHubRepoValid || formState.githubRepo === "", // 수정된 부분
           githubBranch: formState.githubBranch === "",
           accessKey: formState.accessKey === "",
           secretKey: formState.secretKey === "",
@@ -134,6 +115,7 @@ function Main() {
 
         setTimeout(() => {
           setShakeFields({
+            requestTitle: false,
             githubRepo: false,
             githubBranch: false,
             accessKey: false,
@@ -195,8 +177,20 @@ function Main() {
         Build & Provision & Deploy Integration Service
       </p>
 
+      <div className="input-title">Request Title</div>
+      <div className={`input-field ${shakeFields.requestTitle ? "shake" : ""}`}>
+        <input
+          type="text"
+          id="requestTitle"
+          name="requestTitle"
+          value={formState.requestTitle}
+          onChange={handleChange}
+          placeholder="Please Enter Request Title"
+        />
+      </div>
+
+      <div className="input-title">GitHub Repo</div>
       <div className={`input-field ${shakeFields.githubRepo ? "shake" : ""}`}>
-        <label htmlFor="githubRepo">GitHub Repo</label>
         <input
           type="text"
           id="githubRepo"
@@ -206,13 +200,13 @@ function Main() {
           placeholder="Please Enter GitHub Repo"
           className={!validRepoUrl ? "invalid" : ""}
         />
-        {!validRepoUrl && formState.githubRepo !== "" && (
-          <p className="error-message">Invalid GitHub Repo URL</p>
-        )}
       </div>
+      {!validRepoUrl && formState.githubRepo !== "" && (
+        <p className="error-message">Invalid GitHub Repo URL</p>
+      )}
 
+      <div className="input-title">Branch Name</div>
       <div className={`input-field ${shakeFields.githubBranch ? "shake" : ""}`}>
-        <label htmlFor="githubBranch">Branch Name</label>
         <input
           type="text"
           id="githubBranch"
@@ -223,8 +217,8 @@ function Main() {
         />
       </div>
 
+      <div className="input-title">Access Key</div>
       <div className={`input-field ${shakeFields.accessKey ? "shake" : ""}`}>
-        <label htmlFor="accessKey">Access Key</label>
         <input
           type="text"
           id="accessKey"
@@ -235,8 +229,8 @@ function Main() {
         />
       </div>
 
+      <div className="input-title">Secret Key</div>
       <div className={`input-field ${shakeFields.secretKey ? "shake" : ""}`}>
-        <label htmlFor="secretKey">Secret Key</label>
         <input
           type={formState.showSecret ? "text" : "password"}
           id="secretKey"

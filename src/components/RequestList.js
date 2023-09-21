@@ -20,6 +20,7 @@ function formatDateTime(dateTimeString) {
 const requestListData = [
   {
     id: 1,
+    title: "test1",
     repo: "https://github.com/CHOIWONWENG/test0531.git",
     branch: "main",
     state: "프로비저닝 중",
@@ -29,6 +30,7 @@ const requestListData = [
   },
   {
     id: 2,
+    title: "test2",
     repo: "https://github.com/CHOIWONWENG/test0531.git",
     branch: "Master",
     state: "빌드 에러",
@@ -38,6 +40,7 @@ const requestListData = [
   },
   {
     id: 3,
+    title: "test3",
     repo: "https://github.com/CHOIWONWENG/test0531.git",
     branch: "blue",
     state: "정상 배포",
@@ -68,6 +71,7 @@ function RequestList() {
         <thead>
           <tr>
             <th>ID</th>
+            <th>Title</th>
             <th>Github Repo</th>
             <th>Progress</th>
             {/* <th>Error Message</th> */}
@@ -82,6 +86,11 @@ function RequestList() {
                 {/* 요청 목록 항목을 클릭하면 해당 요청 상세 페이지로 이동 */}
                 <Link to={`/request/${item.id}`} className="request-list-link">
                   {item.id}
+                </Link>
+              </td>
+              <td>
+                <Link to={`/request/${item.id}`} className="request-list-link">
+                  {item.title}
                 </Link>
               </td>
               <td>

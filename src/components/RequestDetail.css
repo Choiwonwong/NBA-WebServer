@@ -61,9 +61,13 @@ body {
     flex-basis: 10%;
 }
 
+.post.post-title {
+    flex-basis: 15%;
+}
+
 .post.post-created-at,
 .post.post-updated-at {
-    flex-basis: 30%;
+    flex-basis: 25%;
 }
 
 .post.post-progress {

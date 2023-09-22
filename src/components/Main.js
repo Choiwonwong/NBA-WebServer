@@ -217,7 +217,7 @@ function Main() {
         />
       </div>
 
-      <div className="input-title">Access Key</div>
+      <div className="input-title">AWS Access Key</div>
       <div className={`input-field ${shakeFields.accessKey ? "shake" : ""}`}>
         <input
           type="text"
@@ -229,7 +229,7 @@ function Main() {
         />
       </div>
 
-      <div className="input-title">Secret Key</div>
+      <div className="input-title">AWS Secret Key</div>
       <div className={`input-field ${shakeFields.secretKey ? "shake" : ""}`}>
         <input
           type={formState.showSecret ? "text" : "password"}

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import swal from "sweetalert";
 import "./Main.css";
+import App from "./sse-test";
 
 function Main() {
   const [formState, setFormState] = useState({
@@ -162,7 +163,6 @@ function Main() {
       >
         QUEST
       </Link>
-
       <p className="quest-noti">
         <span className="highlight">Q</span>uick{" "}
         <span className="highlight">U</span>nified{" "}
@@ -170,13 +170,10 @@ function Main() {
         <span className="highlight">S</span>imple{" "}
         <span className="highlight">T</span>ool
       </p>
-
       <div className="divider"></div>
-
       <p className="quest-text">
         Build & Provision & Deploy Integration Service
       </p>
-
       <div className="input-title">Request Title</div>
       <div className={`input-field ${shakeFields.requestTitle ? "shake" : ""}`}>
         <input
@@ -188,7 +185,6 @@ function Main() {
           placeholder="Please Enter Request Title"
         />
       </div>
-
       <div className="input-title">GitHub Repo</div>
       <div className={`input-field ${shakeFields.githubRepo ? "shake" : ""}`}>
         <input
@@ -204,7 +200,6 @@ function Main() {
       {!validRepoUrl && formState.githubRepo !== "" && (
         <p className="error-message">Invalid GitHub Repo URL</p>
       )}
-
       <div className="input-title">Branch Name</div>
       <div className={`input-field ${shakeFields.githubBranch ? "shake" : ""}`}>
         <input
@@ -216,7 +211,6 @@ function Main() {
           placeholder="Please Enter Branch Name"
         />
       </div>
-
       <div className="input-title">AWS Access Key</div>
       <div className={`input-field ${shakeFields.accessKey ? "shake" : ""}`}>
         <input
@@ -228,7 +222,6 @@ function Main() {
           placeholder="Please Enter Access Key"
         />
       </div>
-
       <div className="input-title">AWS Secret Key</div>
       <div className={`input-field ${shakeFields.secretKey ? "shake" : ""}`}>
         <input
@@ -240,27 +233,24 @@ function Main() {
           placeholder="Please Enter Secret Key"
         />
       </div>
-
       <button className="show-secret-button" onClick={toggleShowSecret}>
         <FontAwesomeIcon icon={formState.showSecret ? faEye : faEyeSlash} />
       </button>
-
       <div className="divider"></div>
       <button className="request-button" onClick={handleRequestClick}>
         Request
       </button>
-
       {requestData && (
         <div className="request-data">
           <h3>Test Console</h3>
           <pre>{JSON.stringify(requestData, null, 2)}</pre>
         </div>
       )}
-
       <div className="divider"></div>
       <Link to="/request" className="request-list-button">
         Check Request List
       </Link>
+      <App />
     </div>
   );
 }

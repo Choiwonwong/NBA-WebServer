@@ -69,3 +69,31 @@ body {
 .request-list-link:hover {
     text-decoration: underline;
 }
+
+/* Add this CSS to style the expand/collapse button */
+.expand-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: background-color 0.2s;
+}
+
+.expand-button:focus {
+    outline: none;
+}
+
+.expand-button:hover {
+    background-color: #f0f0f0;
+}
+
+.expand-button svg {
+    font-size: 16px;
+    transition: transform 0.1s;
+    transform: rotate(0deg);
+}
+
+/* Rotate the icon when expanded */
+.expand-button.expanded svg {
+    transform: rotate(-90deg);
+}

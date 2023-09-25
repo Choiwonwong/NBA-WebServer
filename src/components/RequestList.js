@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./RequestList.css";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 function RequestList() {
   const [expandedRows, setExpandedRows] = useState([]);
@@ -70,6 +72,7 @@ function RequestList() {
       <table className="request-table">
         <thead>
           <tr>
+            <th></th> {/* Empty column for the expand buttons/icons */}
             <th>ID</th>
             <th>Title</th>
             <th>Github Repo</th>
@@ -81,12 +84,21 @@ function RequestList() {
         <tbody>
           {requestListData.map((item) => (
             <React.Fragment key={item.id}>
-              <tr
-                className={`request-table-row ${
-                  isRowExpanded(item.id) ? "expanded" : ""
-                }`}
-                onClick={() => toggleRow(item.id)}
-              >
+              <tr className={`request-table-row`}>
+                <td>
+                  <button
+                    className={`expand-button ${
+                      isRowExpanded(item.id) ? "expanded" : ""
+                    }`}
+                    onClick={() => toggleRow(item.id)}
+                  >
+                    <FontAwesomeIcon
+                      icon={
+                        isRowExpanded(item.id) ? faChevronDown : faChevronDown
+                      }
+                    />
+                  </button>
+                </td>
                 <td>{item.id}</td>
                 <td>{item.title}</td>
                 <td>{item.repo}</td>
@@ -96,7 +108,7 @@ function RequestList() {
               </tr>
               {isRowExpanded(item.id) && (
                 <tr className="expanded-content">
-                  <td colSpan="6">
+                  <td colSpan="7">
                     {item.emessage && (
                       <div>
                         <strong>Error Message:</strong> {item.emessage}

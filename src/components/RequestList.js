@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import "./RequestList.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import HorizontalLinearAlternativeLabelStepper from "./stepper";
+import Divider from "@mui/material/Divider";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 function RequestList() {
   const [expandedRows, setExpandedRows] = useState([]);
@@ -109,12 +114,16 @@ function RequestList() {
               {isRowExpanded(item.id) && (
                 <tr className="expanded-content">
                   <td colSpan="7">
-                    {item.emessage && (
-                      <div>
-                        <strong>Error Message:</strong> {item.emessage}
-                      </div>
-                    )}
-                    {/* You can add more expanded content here */}
+                    <Container fixed>
+                      <Box sx={{ height: "30vh", marginTop: "2%" }}>
+                        <HorizontalLinearAlternativeLabelStepper />
+                        <Box sx={{ width: "80%", marginTop: "2%" }}>
+                          asdfadsf
+                          <Divider orientation="vertical" variant="middle" />
+                          asdfasdf
+                        </Box>
+                      </Box>
+                    </Container>
                   </td>
                 </tr>
               )}
@@ -127,3 +136,12 @@ function RequestList() {
 }
 
 export default RequestList;
+
+{
+  /* <Divider orientation="vertical" variant="middle" flexItem /> */
+}
+// {/* {item.emessage && (
+//   <div>
+//     <strong>Error Message:</strong> {item.emessage}
+//   </div>
+// )} */}

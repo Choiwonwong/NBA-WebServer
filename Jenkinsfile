@@ -7,7 +7,7 @@ pipeline {
         ECR_PATH='public.ecr.aws/s2t1t5c1/proto-web'
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential'
-        IMAGE_NAME = 'proto-web'
+        // IMAGE_NAME = 'proto-web'
         IMAGE_VERSION = "1.0.0"
     }
     stages {
@@ -27,8 +27,7 @@ pipeline {
         stage('dockerizing project by dockerfile') {
             steps {
                 sh '''
-        		 docker build -t $IMAGE_NAME:$IMAGE_VERSION .
-        		 docker tag $ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION $IMAGE_NAME:IMAGE_VERSION
+        		 docker build -t $ECR_PATH:$IMAGE_VERSION .
         		 '''
             }
         }
@@ -37,7 +36,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("https://$ECR_PATH", "ecr:$REGION:$AWS_CREDENTIAL_NAME") {
-                        docker.image("$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION").push()
+                        docker.image("$ECR_PATH:$IMAGE_VERSION").push()
                     }
                 }
             } 

@@ -3,12 +3,12 @@ pipeline {
     
     // 환경변수 지정
     environment {
-        REGION='ap-northeast-1'
+        REGION='us-east-1' // 이거 Public Region이라서 그럼
         ECR_PATH='public.ecr.aws/s2t1t5c1/proto-web'
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential'
         // IMAGE_NAME = 'proto-web'
-        IMAGE_VERSION = "1.0.0"
+        IMAGE_VERSION = "1.0.1"
     }
     stages {
         stage('Checkout') {

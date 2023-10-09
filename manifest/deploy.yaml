@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nba-web
+  namespace: web
+  labels:
+    app: nba-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nba-web
+  template:
+    metadata:
+      labels:
+        app: nba-web
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                      - arm64
+      containers:
+        - name: nba-web
+          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:0.0.0
+          ports:
+            - name: http
+              containerPort: 80
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: API-PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: nba-rds-credentials-secret
+                  key: DB_USER
+      nodeSelector:
+        kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nba-web-service
+  namespace: web
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-subnets: nba-public1, nba-public2, nba-public3
+  labels:
+    app: nba-web
+spec:
+  selector:
+    app: nba-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

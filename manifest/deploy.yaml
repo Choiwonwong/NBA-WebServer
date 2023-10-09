@@ -32,12 +32,6 @@ spec:
             - name: http
               containerPort: 80
           imagePullPolicy: IfNotPresent
-          env:
-            - name: API-PREFIX
-              valueFrom:
-                secretKeyRef:
-                  name: nba-rds-credentials-secret
-                  key: DB_USER
       nodeSelector:
         kubernetes.io/os: linux
 ---

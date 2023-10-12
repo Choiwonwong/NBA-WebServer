@@ -6,9 +6,9 @@ pipeline {
         REGION='ap-northeast-1' // 이거 Public Region이라서 그럼
         ECR_PATH='dkr.ecr.ap-northeast-1.amazonaws.com'
         ACCOUNT_ID='622164100401'
-        AWS_CREDENTIAL_NAME='NBA-AWS-Credential'
+        AWS_CREDENTIAL_NAME='NBA-AWS-Credential-v2'
         IMAGE_NAME = 'nba-web'
-        IMAGE_VERSION = "0.0.0"
+        IMAGE_VERSION = "0.0.1"
     }
     stages {
         stage('Checkout') {
@@ -18,7 +18,6 @@ pipeline {
                     url: 'https://github.com/Choiwonwong/NBA-WebServer.git'
             }
         }
-        
         stage('build') {
             steps {
                 sh '''
@@ -26,13 +25,12 @@ pipeline {
         		 '''
             }
         }
-    
         stage('upload aws ECR') {
             steps {                
                 sh 'rm  ~/.dockercfg || true'
                 sh 'rm ~/.docker/config.json || true'
                 script {
-                    docker.withRegistry("https://$ACCOUNT_ID.$ECR_PATH", "ecr:$REGION:NBA-AWS-Credential") {
+                    docker.withRegistry("https://$ACCOUNT_ID.$ECR_PATH", "ecr:$REGION:$AWS_CREDENTIAL_NAME") {
                         docker.image("$ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION").push()
                     }
                 }

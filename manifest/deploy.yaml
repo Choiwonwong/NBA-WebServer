@@ -27,7 +27,7 @@ spec:
                       - arm64
       containers:
         - name: nba-web
-          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:0.0.1
+          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:0.0.2
           ports:
             - name: http
               containerPort: 80

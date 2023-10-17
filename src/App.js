@@ -6,6 +6,7 @@ import RequestPage from "./pages/RequestPage";
 import RequestListPage from "./pages/RequestListPage";
 import RequestDetailPage from "./pages/RequestDetailPage";
 import DocumentPage from "./pages/DocumentPage";
+import "./fonts/Fonts.css";
 
 function App() {
   return (

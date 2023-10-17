@@ -9,11 +9,14 @@ function Hero({ currentPage }) {
     <>
       <div className="px-4 py-3 my-4 text-center">
         <Link to="/" currentPage="MainPage" style={{ textDecoration: "none" }}>
-          <h1 className="display-2 fw-bold lh-1 mb-3">Quest</h1>
+          <h1 className="display-1 fw-bold lh-1 mb-3">Quest</h1>
         </Link>
         <div className="col-lg-12 mb-4">
           <p className="lead display-7 mb-4" style={{ fontSize: 24 }}>
-            <strong>프로비저닝 및 배포 통합 서비스</strong>
+            <strong className="display-6 fw-bold">
+              프로비저닝 및 배포 통합 서비스
+            </strong>
+            <br />
             <br />
             프로비저닝에 필요한 정보와 배포에 필요한 정보를 한 곳에 모아
             관리합니다.

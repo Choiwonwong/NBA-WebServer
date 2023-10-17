@@ -20,8 +20,8 @@ Quest.yaml 파일을 작성하는 방법은 아래의 버튼을 눌러 문서를
 const QuestListDesc = `기존에 Quest 서비스를 사용해보신적이 있으신가요?
 아래의 버튼을 눌러 지금까지 서비스 진행 상황을 확인해보세요.`;
 
-const TeamDesc = `저희 팀은 총 5명으로 구성되어 있습니다.
-자세한 내용은 아래의 카운슬러를 확인해주세요.`;
+const TeamDesc = `팀 NBA는 총 5명으로 구성되어 있습니다.
+자세한 내용은 아래의 Carousel 확인해주세요.`;
 
 function MainPage() {
   return (

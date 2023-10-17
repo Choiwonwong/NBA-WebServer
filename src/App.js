@@ -1,17 +1,21 @@
-// src/App.js
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Main from "./components/Main";
-import RequestList from "./components/RequestList";
-import RequestDetail from "./components/RequestDetail";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import MainPage from "./pages/MainPage";
+import RequestPage from "./pages/RequestPage";
+import RequestListPage from "./pages/RequestListPage";
+import RequestDetailPage from "./pages/RequestDetailPage";
+import DocumentPage from "./pages/DocumentPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/request" element={<RequestList />} />
-        <Route path="/request/:id" element={<RequestDetail />} />{" "}
+        <Route path="/" element={<MainPage />} />
+        <Route path="/request" element={<RequestPage />} />
+        <Route path="/request-list" element={<RequestListPage />} />
+        <Route path="/request-detail/:id" element={<RequestDetailPage />} />
+        <Route path="/document" element={<DocumentPage />} />
       </Routes>
     </Router>
   );

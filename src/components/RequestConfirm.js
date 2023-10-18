@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { CodeBlock, github } from "react-code-blocks";
+import { CodeBlock, googlecode } from "react-code-blocks";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import ConfirmModal from "./ConfirmModal";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 import "./MainCard.css";
 
 // import axios from "axios"; // Import Axios or your preferred HTTP client
 
 function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
   let navigate = useNavigate();
-  const [modalShow, setModalShow] = React.useState(false);
+  // const [modalShow, setModalShow] = React.useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   async function createRequest() {
@@ -24,7 +24,6 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
 
       // history.push("/request-list");
       setTimeout(() => {
-        setModalShow(false);
         setIsLoading(false);
         navigate("/request-list");
       }, 3000);
@@ -64,7 +63,7 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
           language="yaml"
           showLineNumbers={true}
           startingLineNumber={1}
-          theme={github}
+          theme={googlecode}
           customStyle={{
             fontSize: 20,
             fontWeight: "bold",
@@ -72,24 +71,32 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
           }}
         />
         <hr style={{ width: "90%" }} />
-        <Button
-          className="mb-3"
-          variant="primary"
-          size="lg"
-          style={{ width: "20%", fontSize: 30 }}
-          onClick={() => setModalShow(true)}
-        >
-          Quest 요청
-        </Button>
-        <ConfirmModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          onClick={createRequest}
-          title={"Quest 요청 확인"}
-          body={"요청이 시작되면 되돌릴 수 없습니다. 계속하시겠습니까?"}
-          isLoading={isLoading}
-          changeLoading={setIsLoading}
-        />
+        {isLoading ? (
+          <Button
+            variant="primary"
+            className="mb-3"
+            style={{ width: "auto", fontSize: 30 }}
+            disabled
+          >
+            <Spinner
+              animation="border"
+              aria-hidden="true"
+              status="request"
+              style={{ marginRight: 10 }}
+            />
+            Loading...
+          </Button>
+        ) : (
+          <Button
+            className="mb-3"
+            variant="primary"
+            size="lg"
+            style={{ width: "auto", fontSize: 30 }}
+            onClick={() => createRequest()}
+          >
+            Quest 요청
+          </Button>
+        )}
       </Row>
     </Container>
   );

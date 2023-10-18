@@ -65,7 +65,7 @@ function RequestCheck(props) {
           </p>
           <hr style={{ width: "100%" }} />
         </Col>
-        <div className="mb-3" style={{ width: "45%" }}>
+        <div className="mb-3" style={{ width: "auto" }}>
           <Form.Control
             type="file"
             size="lg"

@@ -3,6 +3,7 @@ import "./MainCard.css";
 import { Container, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
+import Badge from "react-bootstrap/Badge";
 
 function RequestCheck(props) {
   const [, setSelectedFileName] = useState(""); // State to store selected file name
@@ -26,11 +27,12 @@ function RequestCheck(props) {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      // 임시 부분
+      // Temporary section
       setTimeout(() => {
         setIsLoading(false);
         setFileCheckResult("모든 검사가 정상적입니다.");
         props.changeProgress(1);
+        props.getQuestYaml(formData);
       }, 5000);
 
       // axios
@@ -53,13 +55,7 @@ function RequestCheck(props) {
       <Row className="p-4 pb-0 pe-lg-2 pt-lg-4 align-items-center rounded-5 border shadow-lg card">
         <Col lg={11.5} className="p-4 p-lg-5 pt-lg-4">
           <h1 className="display-4 fw-bold lh-1">{props.title}</h1>
-          <p
-            className="lead"
-            style={{
-              fontSize: 24,
-              paddingTop: "1rem",
-            }}
-          >
+          <p className="lead" style={{ fontSize: 24, paddingTop: "1rem" }}>
             {props.description.split("\n").map((line, index) => (
               <React.Fragment key={index}>
                 {line}
@@ -69,18 +65,14 @@ function RequestCheck(props) {
           </p>
         </Col>
         <hr style={{ width: "90%" }} />
-        <Form.Group
-          controlId="formFileLg"
-          className="mb-3"
-          style={{ width: "50%" }}
-        >
+        <div className="mb-3" style={{ width: "50%" }}>
           <Form.Control
             type="file"
             size="lg"
             onChange={handleFileChange}
             disabled={fileCheckResult !== ""}
           />
-        </Form.Group>
+        </div>
         {fileError && (
           <p
             style={{
@@ -90,16 +82,19 @@ function RequestCheck(props) {
               fontWeight: "bold",
             }}
           >
+            <Badge bg="danger" style={{ marginRight: "8px" }}>
+              Failed
+            </Badge>
             {fileError}
           </p>
         )}
         {isLoading ? (
-          <p style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center" }}>
             <Spinner style={{ margin: "1.5rem" }} animation="border" />
-            <div style={{ fontSize: 20, fontWeight: "bold" }}>
+            <p style={{ fontSize: 20, fontWeight: "bold" }}>
               Quest.yaml의 내용을 검사중입니다.
-            </div>
-          </p>
+            </p>
+          </div>
         ) : null}
         {fileCheckResult && (
           <>
@@ -109,8 +104,13 @@ function RequestCheck(props) {
                 textAlign: "center",
                 fontSize: 20,
                 fontWeight: "bold",
+                padding: "1rem",
               }}
             >
+              <Badge bg="success" style={{ marginRight: "8px" }}>
+                Success
+              </Badge>
+
               {fileCheckResult}
             </p>
           </>

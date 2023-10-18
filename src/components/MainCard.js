@@ -2,6 +2,7 @@ import React from "react";
 import "./MainCard.css";
 import { Link } from "react-router-dom";
 import { Button, Container, Row, Col } from "react-bootstrap";
+import MyCarousel from "../components/MyCarousel";
 
 function MainCard({
   title,
@@ -40,6 +41,7 @@ function MainCard({
               </Link>
             </div>
           ) : null}
+          {useButton ? null : <MyCarousel />}
         </Col>
       </Row>
     </Container>

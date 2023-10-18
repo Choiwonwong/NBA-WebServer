@@ -47,7 +47,7 @@ function MyCarousel() {
     <Carousel
       activeIndex={index}
       onSelect={handleSelect}
-      interval={null}
+      interval={5000}
       className="mb-4"
       variant="dark"
     >

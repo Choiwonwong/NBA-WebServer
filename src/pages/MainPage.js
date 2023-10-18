@@ -4,7 +4,6 @@ import React from "react";
 import Hero from "../components/Hero";
 import Divider from "../components/Divider";
 import MainCard from "../components/MainCard";
-import MyCarousel from "../components/MyCarousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const QuestRequestDesc = `Quest 서비스는 현재 EKS 환경 프로비저닝에 중점을 두었습니다.
@@ -55,8 +54,6 @@ function MainPage() {
       />
       <Divider />
       <MainCard title="NBA Team 소개" description={TeamDesc} />
-      <hr className="my-4"></hr>
-      <MyCarousel />
     </>
   );
 }

@@ -8,7 +8,9 @@ function ConfirmModal(props) {
       <Modal.Header closeButton>
         <Modal.Title className="display-6 fw-bold">{props.title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ fontSize: 20 }}>{props.body}</Modal.Body>
+      <Modal.Body style={{ fontSize: 20, textAlign: "center" }}>
+        {props.body}
+      </Modal.Body>
       <Modal.Footer>
         {props.isLoading ? (
           <Button

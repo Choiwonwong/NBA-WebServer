@@ -52,10 +52,10 @@ function RequestCheck(props) {
 
   return (
     <Container className="my-5">
-      <Row className="p-4 pb-0 pe-lg-2 pt-lg-4 align-items-center rounded-5 border shadow-lg card">
-        <Col lg={11.5} className="p-4 p-lg-5 pt-lg-4">
-          <h1 className="display-4 fw-bold lh-1">{props.title}</h1>
-          <p className="lead" style={{ fontSize: 24, paddingTop: "1rem" }}>
+      <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border shadow-lg card">
+        <Col lg={11} className="p-lg-2 pt-lg-4">
+          <h1 className="display-5 fw-bold lh-1">{props.title}</h1>
+          <p className="lead" style={{ fontSize: 20, paddingTop: "1rem" }}>
             {props.description.split("\n").map((line, index) => (
               <React.Fragment key={index}>
                 {line}
@@ -63,14 +63,15 @@ function RequestCheck(props) {
               </React.Fragment>
             ))}
           </p>
+          <hr style={{ width: "100%" }} />
         </Col>
-        <hr style={{ width: "90%" }} />
-        <div className="mb-3" style={{ width: "50%" }}>
+        <div className="mb-3" style={{ width: "45%" }}>
           <Form.Control
             type="file"
             size="lg"
             onChange={handleFileChange}
             disabled={fileCheckResult !== ""}
+            style={{ fontSize: 20 }}
           />
         </div>
         {fileError && (

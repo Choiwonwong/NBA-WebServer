@@ -8,7 +8,7 @@ function Hero({ currentPage }) {
   return (
     <>
       <div className="px-4 py-3 my-4 text-center">
-        <Link to="/" currentPage="MainPage" style={{ textDecoration: "none" }}>
+        <Link to="/" currentpage="MainPage" style={{ textDecoration: "none" }}>
           <h1 className="display-1 fw-bold lh-1 mb-3">Quest</h1>
         </Link>
         <div className="col-lg-12 mb-4">
@@ -31,7 +31,7 @@ function Hero({ currentPage }) {
             <ButtonLink
               to="/request"
               nextPage="RequestPage"
-              currentPage={currentPage}
+              currentpage={currentPage}
               variant="primary"
               text="Quest Request"
               cName="hover-questRequest"
@@ -39,7 +39,7 @@ function Hero({ currentPage }) {
             <ButtonLink
               to="/request-list"
               nextPage="RequestListPage"
-              currentPage={currentPage}
+              currentpage={currentPage}
               variant="success"
               text="Request List"
               cName="hover-requestList"
@@ -47,7 +47,7 @@ function Hero({ currentPage }) {
             <ButtonLink
               to="/document"
               nextPage="DocumentPage"
-              currentPage={currentPage}
+              currentpage={currentPage}
               variant="info"
               text="Quest Document"
               cName="hover-questDocu"

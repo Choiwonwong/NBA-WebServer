@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 function ButtonLink({ to, nextPage, currentPage, variant, text, cName }) {
   return (
-    <Link to={to} currentPage={currentPage}>
+    <Link to={to} currentpage={currentPage}>
       <Button
         variant={currentPage === nextPage ? variant : "secondary"}
         size="lg"

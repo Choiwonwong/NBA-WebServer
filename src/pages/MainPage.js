@@ -26,7 +26,7 @@ const TeamDesc = `팀 NBA는 총 5명으로 구성되어 있습니다.
 function MainPage() {
   return (
     <>
-      <Hero currentPage="MainPage" />
+      <Hero currentpage="MainPage" />
       <MainCard
         title="쉽고 통합된 프로비저닝 및 배포 서비스"
         description={QuestRequestDesc}
@@ -35,7 +35,7 @@ function MainPage() {
         buttonText={"Quest Request"}
         useButton={true}
       />
-      <hr class="my-4"></hr>
+      <hr className="my-4"></hr>
       <MainCard
         title="Quest.yaml 메뉴얼"
         description={QuestDocuDesc}
@@ -44,7 +44,7 @@ function MainPage() {
         buttonLink={"/document"}
         useButton={true}
       />
-      <hr class="my-4"></hr>
+      <hr className="my-4"></hr>
       <MainCard
         title="Quest 목록"
         description={QuestListDesc}
@@ -55,7 +55,7 @@ function MainPage() {
       />
       <Divider />
       <MainCard title="NBA Team 소개" description={TeamDesc} />
-      <hr class="my-4"></hr>
+      <hr className="my-4"></hr>
       <MyCarousel />
     </>
   );

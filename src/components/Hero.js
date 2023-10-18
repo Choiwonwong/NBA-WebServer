@@ -31,7 +31,7 @@ function Hero({ currentPage }) {
             <ButtonLink
               to="/request"
               nextPage="RequestPage"
-              currentpage={currentPage}
+              currentPage={currentPage}
               variant="primary"
               text="Quest Request"
               cName="hover-questRequest"
@@ -39,7 +39,7 @@ function Hero({ currentPage }) {
             <ButtonLink
               to="/request-list"
               nextPage="RequestListPage"
-              currentpage={currentPage}
+              currentPage={currentPage}
               variant="success"
               text="Request List"
               cName="hover-requestList"
@@ -47,7 +47,7 @@ function Hero({ currentPage }) {
             <ButtonLink
               to="/document"
               nextPage="DocumentPage"
-              currentpage={currentPage}
+              currentPage={currentPage}
               variant="info"
               text="Quest Document"
               cName="hover-questDocu"

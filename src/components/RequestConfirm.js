@@ -1,9 +1,14 @@
 import React from "react";
 import "./MainCard.css";
 import { Link } from "react-router-dom";
+import { CodeBlock, github } from "react-code-blocks";
 import { Button, Container, Row, Col } from "react-bootstrap";
 
 function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
+  function requestQuest() {
+    console.log("Quest 요청");
+  }
+
   return (
     <Container className="my-5">
       <Row className="p-4 pb-0 pe-lg-2 pt-lg-4 align-items-center rounded-5 border shadow-lg card">
@@ -30,13 +35,25 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
         </Col>
 
         <hr style={{ width: "90%" }} />
-
+        <CodeBlock
+          text={processedQuestYaml.trim()}
+          language="yaml"
+          showLineNumbers={true}
+          startingLineNumber={1}
+          theme={github}
+          customStyle={{
+            fontSize: 20,
+            fontWeight: "bold",
+            width: "90%",
+          }}
+        />
         <hr style={{ width: "90%" }} />
         <Button
           className="mb-3"
           variant="primary"
           size="lg"
           style={{ width: "20%", fontSize: 30 }}
+          onClick={requestQuest}
         >
           Quest 요청
         </Button>

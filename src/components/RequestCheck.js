@@ -90,7 +90,11 @@ function RequestCheck(props) {
         )}
         {isLoading ? (
           <div style={{ textAlign: "center" }}>
-            <Spinner style={{ margin: "1.5rem" }} animation="border" />
+            <Spinner
+              style={{ margin: "1.5rem" }}
+              animation="border"
+              variant="primary"
+            />
             <p style={{ fontSize: 20, fontWeight: "bold" }}>
               Quest.yaml의 내용을 검사중입니다.
             </p>

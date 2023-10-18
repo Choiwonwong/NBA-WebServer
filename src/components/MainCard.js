@@ -33,7 +33,7 @@ function MainCard({
           </p>
           <hr style={{ width: "100%" }} />
           {useButton ? (
-            <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-lg-3">
+            <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
               <Link to={buttonLink}>
                 <Button variant={buttonType} size="lg" className="me-md-2">
                   {buttonText}

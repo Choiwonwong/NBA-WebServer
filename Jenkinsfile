@@ -34,9 +34,8 @@ pipeline {
         stage('Change nginx.conf'){
             steps{
                 script{
-                    sh '''
-                     WEB_DNS=$(kubectl get svc nba-web-service -n web -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-                    sed -i 's/localhost/$WEB_DNS/' nginx.conf
+                    sh '''                     
+                    sed -i 's/localhost/$(kubectl get svc nba-web-service -n web -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')/' nginx.conf
                     '''
                 }
             }

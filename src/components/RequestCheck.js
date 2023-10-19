@@ -6,6 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Badge from "react-bootstrap/Badge";
 import yaml from "js-yaml";
 import axios from "axios";
+import config from "./config";
 
 function RequestCheck(props) {
   const [, setSelectedFileName] = useState(""); // State to store selected file name
@@ -14,7 +15,7 @@ function RequestCheck(props) {
   const [badgeState, setBadgeState] = useState("danger"); // State to manage badge color [success, warning, danger
   const [fileCheckResult, setFileCheckResult] = useState(""); // State to store file check result
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
     setSelectedFileName(selectedFile.name);
     setFileError("");
@@ -27,32 +28,36 @@ function RequestCheck(props) {
       setFileError("");
       setIsLoading(true);
 
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-      axios
-        .post(`${process.env.REACT_APP_API_URL}/requests/check`, formData)
-        .then((response) => {
-          setTimeout(() => {
-            setIsLoading(false);
-            setBadgeState(response.data.result);
-            setFileCheckResult(response.data.message);
-            props.changeProgress(1);
-            props.getQuestYaml(selectedFile);
-            props.getProcessedQuest(yaml.dump(response.data.processedQuest));
-          }, 2000);
-        })
-        .catch((error) => {
-          console.log(error.response);
+      try {
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        const response = await axios.post(
+          `${config.apiUrl}:${config.apiPort}/api/requests/check`,
+          formData
+        );
+        setTimeout(() => {
           setIsLoading(false);
-          setBadgeState(error.response.data.detail.result);
-          setFileCheckResult(error.response.data.detail.message);
-        });
+          setBadgeState(response.data.result);
+          setFileCheckResult(response.data.message);
+          props.changeProgress(1);
+          props.getQuestYaml(selectedFile);
+          props.getProcessedQuest(yaml.dump(response.data.processedQuest));
+        }, 2000);
+      } catch (error) {
+        console.error(error);
+
+        // Handle the error gracefully here
+        setIsLoading(false);
+        setBadgeState("danger");
+        setFileCheckResult("서버 응답이 없습니다."); // 또는 다른 오류 메시지 설정
+      }
     }
   };
 
   return (
     <Container className="my-5 card-container">
-      <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border shadow-lg card">
+      <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border border-3 shadow-lg card">
         <Col lg={11} className="p-lg-2 pt-lg-4">
           <h1 className="display-5 fw-bold lh-1">{props.title}</h1>
           <p className="lead" style={{ fontSize: 20, paddingTop: "1rem" }}>

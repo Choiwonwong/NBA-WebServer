@@ -15,25 +15,24 @@ spec:
       labels:
         app: nba-web
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/arch
-                    operator: In
-                    values:
-                      - amd64
-                      - arm64
       containers:
         - name: nba-web
-          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:1.0.10
+          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:1.1.0
           ports:
             - name: http
               containerPort: 80
           imagePullPolicy: IfNotPresent
-      nodeSelector:
-        kubernetes.io/os: linux
+          env:
+            - name: REACT_APP_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-server-url-secret
+                  key: API_DNS
+            - name: REACT_APP_API_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: api-server-port-secret
+                  key: API_PORT
 ---
 apiVersion: v1
 kind: Service

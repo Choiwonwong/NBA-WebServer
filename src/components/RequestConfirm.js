@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
+import config from "./config";
 import "./MainCard.css";
 
 function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
@@ -16,7 +17,7 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
     const formData = new FormData();
     formData.append("file", questYaml.questYamlData);
     await axios
-      .post(`${process.env.REACT_APP_API_URL}/requests/`, formData)
+      .post(`${config.apiUrl}:${config.apiPort}/api/requests/`, formData)
       .then(() => {
         setIsLoading(false);
         navigate("/request-list");
@@ -28,7 +29,7 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
   }
   return (
     <Container className="my-5 card-container">
-      <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border shadow-lg card">
+      <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border border-3 shadow-lg card">
         <Col lg={11} className="p-lg-2 pt-lg-4">
           <h1 className="display-5 fw-bold lh-1">{title}</h1>
 

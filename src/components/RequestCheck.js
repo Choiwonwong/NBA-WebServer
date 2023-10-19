@@ -4,11 +4,14 @@ import { Container, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
 import Badge from "react-bootstrap/Badge";
+import yaml from "js-yaml";
+import axios from "axios";
 
 function RequestCheck(props) {
   const [, setSelectedFileName] = useState(""); // State to store selected file name
   const [fileError, setFileError] = useState(""); // State to store file error message
   const [isLoading, setIsLoading] = useState(false); // State to manage loading
+  const [badgeState, setBadgeState] = useState("danger"); // State to manage badge color [success, warning, danger
   const [fileCheckResult, setFileCheckResult] = useState(""); // State to store file check result
 
   const handleFileChange = (event) => {
@@ -27,26 +30,24 @@ function RequestCheck(props) {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      // Temporary section
-      setTimeout(() => {
-        setIsLoading(false);
-        setFileCheckResult("모든 검사가 정상적입니다.");
-        props.changeProgress(1);
-        props.getQuestYaml(formData);
-      }, 5000);
-
-      // axios
-      //   .post("http://localhost:8000/requests/check", formData)
-      //   .then((response) => {
-      //     // Handle the response here
-      //     setIsLoading(false); // Stop loading when the response is received
-      //     setFileCheckResult(response.data);
-      //   })
-      //   .catch((error) => {
-      //     // Handle errors here
-      //     setIsLoading(false); // Stop loading on error
-      //     setFileCheckResult(error.message);
-      //   });
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/requests/check`, formData)
+        .then((response) => {
+          setTimeout(() => {
+            setIsLoading(false);
+            setBadgeState(response.data.result);
+            setFileCheckResult(response.data.message);
+            props.changeProgress(1);
+            props.getQuestYaml(formData);
+            props.getProcessedQuest(yaml.dump(response.data.processedQuest));
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          setIsLoading(false);
+          setBadgeState(error.response.data.detail.result);
+          setFileCheckResult(error.response.data.detail.message);
+        });
     }
   };
 
@@ -112,10 +113,9 @@ function RequestCheck(props) {
                 padding: "1rem",
               }}
             >
-              <Badge bg="success" style={{ marginRight: "8px" }}>
-                Success
+              <Badge bg={badgeState} style={{ marginRight: "8px" }}>
+                {badgeState === "success" ? "Success" : "Failed"}
               </Badge>
-
               {fileCheckResult}
             </p>
           </>

@@ -10,7 +10,6 @@ import "./MainCard.css";
 
 function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
   let navigate = useNavigate();
-  // const [modalShow, setModalShow] = React.useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   async function createRequest() {
@@ -22,7 +21,6 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
       //   questYaml: questYaml,
       // });
 
-      // history.push("/request-list");
       setTimeout(() => {
         setIsLoading(false);
         navigate("/request-list");

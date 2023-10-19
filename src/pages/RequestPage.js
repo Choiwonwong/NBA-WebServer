@@ -12,19 +12,10 @@ const confirmDesc = `작성해주신 Quest.yaml은 아래의 요소들로 처리
 어려우시다면, Quest 서비스를 믿고 맡겨주세요.
 Quest 서비스를 요청하시려면 가장 아래의 요청 버튼을 눌러주세요.`;
 
-const exampleQuestYaml = `
-요청_제목: "api-test"
-배포_지역_명: "ap-northeast-1"
-클러스터_명: "nba-eks"
-네트워크_영역: "10.10.0.0/16"
-인터넷_영역_수: "3"
-보안_영역_수: "3"
-`;
-
 function RequestPage() {
   const [requestProgress, setRequestProgress] = useState(0);
   const [questYaml, setQuestYaml] = useState(null);
-  const [processedQuest, setProcessedQuest] = useState(exampleQuestYaml);
+  const [processedQuest, setProcessedQuest] = useState("");
 
   const handleQuestYamlChange = (questYamlData) => {
     setQuestYaml({ ...questYamlData });

@@ -8,7 +8,7 @@ pipeline {
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential-v2'
         IMAGE_NAME = 'nba-web'
-        IMAGE_VERSION = "1.1.3"
+        IMAGE_VERSION = "1.1.4"
     }
     stages {
         stage('Checkout') {
@@ -30,6 +30,16 @@ pipeline {
                     }
                     }
 
+        }
+        stage('Change nginx.conf'){
+            steps{
+                script{
+                    sh '''
+                     WEB_DNS=$(kubectl get svc nba-web-service -n web -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+                    sed -i 's/localhost/$WEB_DNS/' /path/to/nginx.conf
+                    '''
+                }
+            }
         }
         stage('build') {
             steps {

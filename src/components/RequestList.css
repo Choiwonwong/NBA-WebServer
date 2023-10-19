@@ -1,0 +1,9 @@
+.acordion-container {
+    width: 80%;
+}
+
+@media (min-width: 768px) {
+    .acordion-container {
+        width: 60%;
+    }
+}

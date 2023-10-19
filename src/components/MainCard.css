@@ -4,3 +4,14 @@
     transition: transform 0.2s ease;
     /* 확대 애니메이션 시간을 조절할 수 있습니다. */
 }
+
+
+.card-container {
+    width: 80%;
+}
+
+@media (min-width: 768px) {
+    .card-container {
+        width: 55%;
+    }
+}

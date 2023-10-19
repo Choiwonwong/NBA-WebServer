@@ -18,7 +18,7 @@ function RequestPage() {
   const [processedQuest, setProcessedQuest] = useState("");
 
   const handleQuestYamlChange = (questYamlData) => {
-    setQuestYaml({ ...questYamlData });
+    setQuestYaml({ questYamlData });
   };
 
   return (

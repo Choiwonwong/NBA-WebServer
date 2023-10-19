@@ -29,7 +29,6 @@ function RequestCheck(props) {
 
       const formData = new FormData();
       formData.append("file", selectedFile);
-
       axios
         .post(`${process.env.REACT_APP_API_URL}/requests/check`, formData)
         .then((response) => {
@@ -38,7 +37,7 @@ function RequestCheck(props) {
             setBadgeState(response.data.result);
             setFileCheckResult(response.data.message);
             props.changeProgress(1);
-            props.getQuestYaml(formData);
+            props.getQuestYaml(selectedFile);
             props.getProcessedQuest(yaml.dump(response.data.processedQuest));
           }, 2000);
         })
@@ -52,7 +51,7 @@ function RequestCheck(props) {
   };
 
   return (
-    <Container className="my-5">
+    <Container className="my-5 card-container">
       <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border shadow-lg card">
         <Col lg={11} className="p-lg-2 pt-lg-4">
           <h1 className="display-5 fw-bold lh-1">{props.title}</h1>

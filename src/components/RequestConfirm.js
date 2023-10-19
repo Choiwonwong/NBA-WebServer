@@ -4,34 +4,30 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import axios from "axios";
 import "./MainCard.css";
-
-// import axios from "axios"; // Import Axios or your preferred HTTP client
 
 function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
   let navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   async function createRequest() {
-    try {
-      setIsLoading(true);
-
-      // Make a POST request to the API
-      // const response = await axios.post("http://localhost:8000/api/requests", {
-      //   questYaml: questYaml,
-      // });
-
-      setTimeout(() => {
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append("file", questYaml.questYamlData);
+    await axios
+      .post(`${process.env.REACT_APP_API_URL}/requests/`, formData)
+      .then(() => {
         setIsLoading(false);
         navigate("/request-list");
-      }, 3000);
-    } catch (error) {
-      console.error("An error occurred:", error);
-      setIsLoading(false);
-    }
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+        setIsLoading(false);
+      });
   }
   return (
-    <Container className="my-5">
+    <Container className="my-5 card-container">
       <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border shadow-lg card">
         <Col lg={11} className="p-lg-2 pt-lg-4">
           <h1 className="display-5 fw-bold lh-1">{title}</h1>

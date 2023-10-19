@@ -8,7 +8,7 @@ pipeline {
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential-v2'
         IMAGE_NAME = 'nba-web'
-        IMAGE_VERSION = "1.1.1"
+        IMAGE_VERSION = "1.1.2"
     }
     stages {
         stage('Checkout') {
@@ -24,7 +24,7 @@ pipeline {
                     sh 'rm -f .env.production'
                     sh '''
                     touch .env.production
-                    echo "REACT_APP_API_DNS=$(kubectl get svc nba-api-service -n api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')" >> .env.production
+                    echo "REACT_APP_API_URL=$(kubectl get svc nba-api-service -n api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')" >> .env.production
                     echo "REACT_APP_API_PORT=8000" >> .env.production
                     '''
                     }

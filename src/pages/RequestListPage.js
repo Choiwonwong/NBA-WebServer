@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Badge, Container } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import RequestsList from "../components/RequestsList";
+import Config from "../components/Config";
 import Hero from "../components/Hero";
 import "../components/RequestsList.css";
 import axios from "axios";
-import Config from "../components/Config";
 
 function RequestListPage() {
   const [requests, setRequests] = useState([]); // 요청 데이터를 담을 상태 변수

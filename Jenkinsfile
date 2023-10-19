@@ -18,42 +18,42 @@ pipeline {
                     url: 'https://github.com/Choiwonwong/NBA-WebServer.git'
             }
         }
-        stage('Get API EndPoint'){
-            steps {
-                script {
-                    sh 'rm -f .env.production'
-                    sh '''
-                    touch .env.production
-                    echo "REACT_APP_API_URL=$(kubectl get svc nba-api-service -n api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')" >> .env.production
-                    echo "REACT_APP_API_PORT=8000" >> .env.production
-                    '''
-                    }
-                    }
+        // stage('Get API EndPoint'){
+        //     steps {
+        //         script {
+        //             sh 'rm -f .env.production'
+        //             sh '''
+        //             touch .env.production
+        //             echo "REACT_APP_API_URL=$(kubectl get svc nba-api-service -n api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')" >> .env.production
+        //             echo "REACT_APP_API_PORT=8000" >> .env.production
+        //             '''
+        //             }
+        //             }
 
-        }
-        stage('build') {
-            steps {
-                sh '''
-        		 docker build -t $ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION .
-        		 '''
-            }
-        }
-        stage('upload aws ECR') {
-            steps {                
-                sh 'rm  ~/.dockercfg || true'
-                sh 'rm ~/.docker/config.json || true'
-                script {
-                    docker.withRegistry("https://$ACCOUNT_ID.$ECR_PATH", "ecr:$REGION:$AWS_CREDENTIAL_NAME") {
-                        docker.image("$ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION").push()
-                    }
-                }
-            } 
-        }
-        stage('Deploy in NBA EKS') {
-            steps {                
-                sh 'kubectl apply -f manifest/deployment.yaml'
-            } 
-        }
+        // }
+        // stage('build') {
+        //     steps {
+        //         sh '''
+        // 		 docker build -t $ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION .
+        // 		 '''
+        //     }
+        // }
+        // stage('upload aws ECR') {
+        //     steps {                
+        //         sh 'rm  ~/.dockercfg || true'
+        //         sh 'rm ~/.docker/config.json || true'
+        //         script {
+        //             docker.withRegistry("https://$ACCOUNT_ID.$ECR_PATH", "ecr:$REGION:$AWS_CREDENTIAL_NAME") {
+        //                 docker.image("$ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION").push()
+        //             }
+        //         }
+        //     } 
+        // }
+        // stage('Deploy in NBA EKS') {
+        //     steps {                
+        //         sh 'kubectl apply -f manifest/deployment.yaml'
+        //     } 
+        // }
     }
 }
 

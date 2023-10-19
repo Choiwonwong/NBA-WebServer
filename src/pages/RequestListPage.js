@@ -5,7 +5,7 @@ import RequestsList from "../components/RequestsList";
 import Hero from "../components/Hero";
 import "../components/RequestsList.css";
 import axios from "axios";
-import config from "../components/config";
+import Config from "../components/Config";
 
 function RequestListPage() {
   const [requests, setRequests] = useState([]); // 요청 데이터를 담을 상태 변수
@@ -14,7 +14,7 @@ function RequestListPage() {
   const fetchRequests = async () => {
     try {
       const response = await axios.get(
-        `${config.apiUrl}:${config.apiPort}/api/requests/`
+        `${Config.apiUrl}:${Config.apiPort}/api/requests/`
       );
       const reveredData = response.data.reverse();
       setRequests(reveredData);

@@ -6,7 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Badge from "react-bootstrap/Badge";
 import yaml from "js-yaml";
 import axios from "axios";
-import config from "./config";
+import Config from "./Config";
 
 function RequestCheck(props) {
   const [, setSelectedFileName] = useState(""); // State to store selected file name
@@ -33,7 +33,7 @@ function RequestCheck(props) {
         formData.append("file", selectedFile);
 
         const response = await axios.post(
-          `${config.apiUrl}:${config.apiPort}/api/requests/check`,
+          `${Config.apiUrl}:${Config.apiPort}/api/requests/check`,
           formData
         );
         setTimeout(() => {

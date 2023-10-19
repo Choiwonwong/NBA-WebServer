@@ -22,17 +22,6 @@ spec:
             - name: http
               containerPort: 80
           imagePullPolicy: IfNotPresent
-          env:
-            - name: REACT_APP_API_URL
-              valueFrom:
-                secretKeyRef:
-                  name: api-server-url-secret
-                  key: API_DNS
-            - name: REACT_APP_API_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: api-server-port-secret
-                  key: API_PORT
 ---
 apiVersion: v1
 kind: Service

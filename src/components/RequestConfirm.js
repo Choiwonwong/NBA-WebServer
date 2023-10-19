@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
-import config from "./config";
+import Config from "./Config";
 import "./MainCard.css";
 
 function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
@@ -17,7 +17,7 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
     const formData = new FormData();
     formData.append("file", questYaml.questYamlData);
     await axios
-      .post(`${config.apiUrl}:${config.apiPort}/api/requests/`, formData)
+      .post(`${Config.apiUrl}:${Config.apiPort}/api/requests/`, formData)
       .then(() => {
         setIsLoading(false);
         navigate("/request-list");

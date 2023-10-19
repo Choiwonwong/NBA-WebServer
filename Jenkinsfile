@@ -34,10 +34,10 @@ pipeline {
         stage('Change nginx.conf'){
     steps{
         script{
-            sh """
+            sh '''
             NEW_DNS=$(kubectl get svc nba-web-service -n web -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
             sed -i "s/localhost/\$NEW_DNS/" nginx.conf
-            """
+            '''
         }
     }
 }

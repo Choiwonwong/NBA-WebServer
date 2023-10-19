@@ -30,29 +30,29 @@ pipeline {
                     }
 
         }
-        // stage('build') {
-        //     steps {
-        //         sh '''
-        // 		 docker build -t $ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION .
-        // 		 '''
-        //     }
-        // }
-        // stage('upload aws ECR') {
-        //     steps {                
-        //         sh 'rm  ~/.dockercfg || true'
-        //         sh 'rm ~/.docker/config.json || true'
-        //         script {
-        //             docker.withRegistry("https://$ACCOUNT_ID.$ECR_PATH", "ecr:$REGION:$AWS_CREDENTIAL_NAME") {
-        //                 docker.image("$ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION").push()
-        //             }
-        //         }
-        //     } 
-        // }
-        // stage('Deploy in NBA EKS') {
-        //     steps {                
-        //         sh 'kubectl apply -f manifest/deployment.yaml'
-        //     } 
-        // }
+        stage('build') {
+            steps {
+                sh '''
+        		 docker build -t $ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION .
+        		 '''
+            }
+        }
+        stage('upload aws ECR') {
+            steps {                
+                sh 'rm  ~/.dockercfg || true'
+                sh 'rm ~/.docker/config.json || true'
+                script {
+                    docker.withRegistry("https://$ACCOUNT_ID.$ECR_PATH", "ecr:$REGION:$AWS_CREDENTIAL_NAME") {
+                        docker.image("$ACCOUNT_ID.$ECR_PATH/$IMAGE_NAME:$IMAGE_VERSION").push()
+                    }
+                }
+            } 
+        }
+        stage('Deploy in NBA EKS') {
+            steps {                
+                sh 'kubectl apply -f manifest/deployment.yaml'
+            } 
+        }
     }
 }
 

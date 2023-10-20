@@ -6,7 +6,7 @@ pipeline {
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential-v2'
         IMAGE_NAME = 'nba-web'
-        IMAGE_VERSION = "1.2.3"
+        IMAGE_VERSION = "1.2.4"
     }
     stages {
         stage('Checkout') {
@@ -15,6 +15,11 @@ pipeline {
                     credentialsId: 'NBA-Web-API-Gitops-Pipeline-Credential',
                     url: 'https://github.com/Choiwonwong/NBA-WebServer.git'
             }
+        }
+        stage('Deploy SVC in NBA EKS') {
+            steps {                
+                sh 'kubectl apply -f manifest/service.yaml'
+            } 
         }
         stage('Get API EndPoint'){
             steps {
@@ -25,20 +30,19 @@ pipeline {
                     echo "REACT_APP_API_URL=$(kubectl get svc nba-api-service -n api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')" >> .env.production
                     echo "REACT_APP_API_PORT=8000" >> .env.production
                     '''
-                    }
-                    }
-
+                }
+            }
         }
         stage('Change nginx.conf'){
-    steps{
-        script{
-            sh '''
-            NEW_DNS=$(kubectl get svc nba-web-service -n web -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-            sed -i "s/localhost/\$NEW_DNS/" nginx.conf
-            '''
+            steps{
+                script{
+                    sh '''
+                    NEW_DNS=$(kubectl get svc nba-web-service -n web -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+                    sed -i "s/localhost/\$NEW_DNS/" nginx.conf
+                    '''
+                }
+            }
         }
-    }
-}
         stage('build') {
             steps {
                 sh '''

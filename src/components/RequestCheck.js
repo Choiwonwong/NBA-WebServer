@@ -42,7 +42,7 @@ function RequestCheck(props) {
           setFileCheckResult(response.data.message);
           props.changeProgress(1);
           props.getQuestYaml(selectedFile);
-          props.getProcessedQuest(yaml.dump(response.data.processedQuest));
+          props.getProcessedQuest(yaml.dump(response.data.userQuestYaml));
         }, 2000);
       } catch (error) {
         console.error(error);

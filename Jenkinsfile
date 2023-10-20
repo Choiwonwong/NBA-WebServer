@@ -16,11 +16,6 @@ pipeline {
                     url: 'https://github.com/Choiwonwong/NBA-WebServer.git'
             }
         }
-        stage('Deploy SVC in NBA EKS') {
-            steps {                
-                sh 'kubectl apply -f manifest/service.yaml'
-            } 
-        }
         stage('Get API EndPoint'){
             steps {
                 script {

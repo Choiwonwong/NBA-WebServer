@@ -1,0 +1,141 @@
+@keyframes changeBackgroundBrightness {
+    0% {
+        background: gray;
+    }
+
+    50% {
+        background: lightgray;
+        /* 밝은 배경 색상 */
+    }
+
+    100% {
+        background: gray;
+    }
+}
+
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background: gray;
+    background-size: 100% 100%;
+    animation: rotateBackground 3s linear infinite, changeBackgroundBrightness 6s linear infinite;
+    /* 애니메이션을 적용하고 기간을 6초로 설정 */
+}
+
+@keyframes changeBackgroundBrightness {
+    0% {
+        background: black;
+    }
+
+    50% {
+        background: white;
+        /* 밝은 배경 색상 */
+    }
+
+    100% {
+        background: black;
+    }
+}
+
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    height: 100vh;
+    overflow: hidden;
+    background: gray;
+    background-size: 100% 100%;
+    animation: rotateBackground 3s linear infinite, changeBackgroundBrightness 1s linear infinite;
+    /* 애니메이션을 적용하고 기간을 6초로 설정 */
+}
+
+@keyframes rotateBackground {
+    0% {
+        transform: rotate(0deg);
+        /* 0도에서 시작하여 시계 방향으로 회전 */
+    }
+
+    100% {
+        transform: rotate(360deg);
+        /* 360도까지 회전 (한 바퀴) */
+    }
+}
+
+.rainbow-text {
+    font-size: 4rem;
+    cursor: pointer;
+    animation: bounce 1s infinite, move 2s infinite;
+    transform: translateY(-200px);
+    /* Move text up initially */
+}
+
+.color-0 {
+    color: red;
+}
+
+.color-1 {
+    color: orange;
+}
+
+.color-2 {
+    color: yellow;
+}
+
+.color-3 {
+    color: green;
+}
+
+.color-4 {
+    color: blue;
+}
+
+.color-5 {
+    color: indigo;
+}
+
+.color-6 {
+    color: violet;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-20px);
+    }
+
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes move {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(0, -200px);
+    }
+
+    50% {
+        transform: translate(200px, -200px);
+    }
+
+    75% {
+        transform: translate(200px, 0);
+    }
+}

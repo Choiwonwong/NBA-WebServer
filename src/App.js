@@ -6,6 +6,7 @@ import RequestPage from "./pages/RequestPage";
 import RequestListPage from "./pages/RequestListPage";
 import RequestDetailPage from "./pages/RequestDetailPage";
 import DocumentPage from "./pages/DocumentPage";
+import NotFound from "./pages/NotFound";
 import "./fonts/Fonts.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/request-list" element={<RequestListPage />} />
         <Route path="/request-detail/:id" element={<RequestDetailPage />} />
         <Route path="/document" element={<DocumentPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

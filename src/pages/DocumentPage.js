@@ -2,14 +2,18 @@
 
 import React from "react";
 import Hero from "../components/Hero";
+import MDCard from "../components/MDCard";
 
 function DocumentPage() {
   return (
-    <main>
+    <>
       <Hero currentPage="DocumentPage" />
-      <h1>Quest Document Page</h1>
-      {/* 내용을 여기에 추가하세요 */}
-    </main>
+      <div className="px-4 my-2 text-center">
+        <h1 className="display-5 fw-bold lh-1 mb-4">Quest Documentation</h1>
+      </div>
+      <hr />
+      <MDCard />
+    </>
   );
 }
 

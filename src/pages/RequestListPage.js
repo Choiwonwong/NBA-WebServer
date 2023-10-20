@@ -34,9 +34,9 @@ function RequestListPage() {
       <div className="px-4 my-2 text-center">
         <h1 className="display-5 fw-bold lh-1 mb-4">Request List</h1>
       </div>
+      <hr />
       {error ? (
         <>
-          <hr />
           <p className=" px-4 my-2 text-center" style={{ fontSize: 30 }}>
             <Badge bg="danger" style={{ marginRight: "1rem" }}>
               Failed

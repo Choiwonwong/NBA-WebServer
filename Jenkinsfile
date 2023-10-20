@@ -1,14 +1,12 @@
 pipeline {
     agent any
-    
-    // 환경변수 지정
     environment {
-        REGION='ap-northeast-1' // 이거 Public Region이라서 그럼
+        REGION='ap-northeast-1'
         ECR_PATH='dkr.ecr.ap-northeast-1.amazonaws.com'
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential-v2'
         IMAGE_NAME = 'nba-web'
-        IMAGE_VERSION = "1.2.1"
+        IMAGE_VERSION = "1.2.2"
     }
     stages {
         stage('Checkout') {

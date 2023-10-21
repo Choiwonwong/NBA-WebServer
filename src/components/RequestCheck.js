@@ -45,12 +45,9 @@ function RequestCheck(props) {
           props.getProcessedQuest(yaml.dump(response.data.userQuestYaml));
         }, 2000);
       } catch (error) {
-        console.error(error);
-
-        // Handle the error gracefully here
         setIsLoading(false);
-        setBadgeState("danger");
-        setFileCheckResult("서버 응답이 없습니다."); // 또는 다른 오류 메시지 설정
+        setBadgeState(error.response.data.detail.result);
+        setFileCheckResult(error.response.data.detail.message); // 또는 다른 오류 메시지 설정
       }
     }
   };

@@ -36,18 +36,35 @@ function RequestCheck(props) {
           `${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/check`,
           formData
         );
-        setTimeout(() => {
+
+        if (response.status === 200) {
+          // 1. 정상 요청일 때
           setIsLoading(false);
           setBadgeState(response.data.result);
           setFileCheckResult(response.data.message);
           props.changeProgress(1);
           props.getQuestYaml(selectedFile);
           props.getProcessedQuest(yaml.dump(response.data.userQuestYaml));
-        }, 2000);
+        } else {
+          // 3. 서버가 400 메시지를 보낼 때
+          setIsLoading(false);
+          setBadgeState("error");
+          setFileCheckResult("서버에서 잘못된 요청을 받았습니다.");
+        }
       } catch (error) {
-        setIsLoading(false);
-        setBadgeState(error.response.data.detail.result);
-        setFileCheckResult(error.response.data.detail.message); // 또는 다른 오류 메시지 설정
+        if (error.response) {
+          // 3. 서버가 400 메시지를 보낼 때
+          setIsLoading(false);
+          setBadgeState("error");
+          setFileCheckResult(error.response.data.detail.message); // 또는 다른 오류 메시지 설정
+        } else {
+          // 2. 서버가 응답하지 않을 때
+          setIsLoading(false);
+          setBadgeState("error");
+          setFileCheckResult(
+            "서버에 연결할 수 없습니다. 나중에 다시 시도해주세요."
+          );
+        }
       }
     }
   };

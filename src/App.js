@@ -15,8 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/request" element={<RequestPage />} />
-        <Route path="/request-list" element={<RequestListPage />} />
-        <Route path="/request-detail/:id" element={<RequestDetailPage />} />
+        <Route path="/requests" element={<RequestListPage />} />
+        <Route path="/requests/:id" element={<RequestDetailPage />} />
         <Route path="/document" element={<DocumentPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

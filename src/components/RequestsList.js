@@ -119,9 +119,15 @@ function RequestsList(props) {
               <Button
                 variant="info"
                 className="mx-auto card-button"
-                style={{ fontSize: 28 }}
+                style={{
+                  fontSize: "24px",
+                  width: "90%",
+                  padding: "10px 20px", // 버튼 크기 조절
+                }}
                 onClick={() => {
-                  navigate(`/request-detail/${props.id}/`, {});
+                  navigate(`/requests/${props.id}/`, {
+                    replace: true,
+                  });
                 }}
               >
                 상세 정보

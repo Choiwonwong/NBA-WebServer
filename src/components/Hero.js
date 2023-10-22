@@ -37,11 +37,11 @@ function Hero({ currentPage }) {
               cName="hover-questRequest"
             />
             <ButtonLink
-              to="/request-list"
+              to="/requests"
               nextPage="RequestListPage"
               currentPage={currentPage}
               variant="success"
-              text="Request List"
+              text="Quest List"
               cName="hover-requestList"
             />
             <ButtonLink

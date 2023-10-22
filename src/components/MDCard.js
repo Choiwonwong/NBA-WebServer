@@ -1,9 +1,8 @@
 import Markdown from "react-markdown";
 import "./MDCard.css";
-import QuestDoc from "./Document";
 import { Container } from "react-bootstrap";
 
-function MDCard() {
+function MDCard({ markdownContent }) {
   return (
     <Container className="my-5 card-container ">
       <div
@@ -17,7 +16,7 @@ function MDCard() {
           paddingBottom: "3rem",
         }}
       >
-        <Markdown>{QuestDoc}</Markdown>
+        <Markdown>{markdownContent}</Markdown>
       </div>
     </Container>
   );

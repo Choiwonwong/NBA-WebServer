@@ -1,10 +1,10 @@
-.acordion-container {
+.detail-acordion-container {
     width: 80%;
 }
 
 @media (min-width: 1000px) {
-    .acordion-container {
-        width: 50%;
+    .detail-acordion-container {
+        width: 65%;
     }
 }
 

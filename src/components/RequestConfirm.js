@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
-import axios from "axios";
 import ApiUrl from "../components/ApiUrl";
 import "./MainCard.css";
+import axios from "axios";
 
 function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
   let navigate = useNavigate();
@@ -60,7 +60,7 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
           startingLineNumber={1}
           theme={googlecode}
           customStyle={{
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: "bold",
             width: "90%",
           }}

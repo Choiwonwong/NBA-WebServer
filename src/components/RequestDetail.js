@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import RequestDetailBadge from "./RequestDetailBadge";
+import { MetaInfoBadge, EKSInfoBadge, DPInfoBadge } from "./RequestDetailBadge";
 import "./RequestDetail.css";
 
 function AccordianHeader(props) {
@@ -85,19 +85,15 @@ function RequestDetail(props) {
               <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
                 <GridCol
                   title={"처리 상태"}
-                  content={
-                    <RequestDetailBadge status={MetaInfo.processState} />
-                  }
+                  content={<MetaInfoBadge status={MetaInfo.processState} />}
                 />
                 <GridCol
                   title={"프로비저닝 상태"}
-                  content={
-                    <RequestDetailBadge status={MetaInfo.provisionState} />
-                  }
+                  content={<MetaInfoBadge status={MetaInfo.provisionState} />}
                 />
                 <GridCol
                   title={"배포 상태"}
-                  content={<RequestDetailBadge status={MetaInfo.deployState} />}
+                  content={<MetaInfoBadge status={MetaInfo.deployState} />}
                 />
               </Row>
               <Row
@@ -123,17 +119,87 @@ function RequestDetail(props) {
             </Container>
           </Accordion.Body>
         </Accordion.Item>
+
         <Accordion.Item eventKey="1">
           <AccordianHeader id={props.id} title={"프로비저닝 정보"} />
           <Accordion.Body
             style={{ justifyContent: "start", textAlign: "left" }}
-          ></Accordion.Body>
+          >
+            <Row className="mb-2">
+              <GridCol
+                title={"클러스터 이름"}
+                content={DetailInfo.provision.eks_name}
+              />
+              <GridCol
+                title={"클러스터 버전"}
+                content={DetailInfo.provision.eks_version}
+              />
+              <GridCol
+                title={"클러스터 상태"}
+                content={
+                  <EKSInfoBadge status={DetailInfo.provision.eks_status} />
+                }
+                IsLast={true}
+              />
+            </Row>
+            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+              <GridCol
+                title={"클러스터 엔드포인트"}
+                content={DetailInfo.provision.eks_endpoint}
+                IsLast={true}
+              />
+            </Row>
+            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+              <GridCol
+                title={"데이터플레인 이름"}
+                content={DetailInfo.provision.dataplane_name}
+              />
+              <GridCol
+                title={"데이터플레인 타입"}
+                content={DetailInfo.provision.dataplane_type}
+              />
+              <GridCol
+                title={"데이터플레인 상태"}
+                content={
+                  <DPInfoBadge status={DetailInfo.provision.dp_status} />
+                }
+                IsLast={
+                  DetailInfo.provision.dataplane_type === "nodegroup"
+                    ? false
+                    : true
+                }
+              />
+              {DetailInfo.provision.dataplane_type === "nodegroup" ? (
+                <GridCol
+                  title={"가상머신 개수"}
+                  content={DetailInfo.provision.ng_current_count}
+                  IsLast={true}
+                />
+              ) : null}
+            </Row>
+            {DetailInfo.provision.dataplane_type === "nodegroup" ? (
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+                <GridCol />
+              </Row>
+            ) : null}
+          </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="2">
           <AccordianHeader id={props.id} title={"배포 정보"} />
           <Accordion.Body
             style={{ justifyContent: "start", textAlign: "left" }}
-          ></Accordion.Body>
+          >
+            <Row className="mb-2">
+              <GridCol />
+              <GridCol />
+              <GridCol IsLast={true} />
+            </Row>
+            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+              <GridCol />
+              <GridCol />
+              <GridCol IsLast={true} />
+            </Row>
+          </Accordion.Body>
         </Accordion.Item>
       </Accordion>
     </Container>

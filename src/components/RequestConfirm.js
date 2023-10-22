@@ -20,7 +20,7 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
       .post(`${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/`, formData)
       .then(() => {
         setIsLoading(false);
-        navigate("/request-list");
+        navigate("/requests");
       })
       .catch((error) => {
         console.error("An error occurred:", error);

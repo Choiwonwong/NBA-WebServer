@@ -4,7 +4,13 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { MetaInfoBadge, EKSInfoBadge, DPInfoBadge } from "./RequestDetailBadge";
+import {
+  MetaInfoBadge,
+  EKSInfoBadge,
+  DPInfoBadge,
+  NDInfoBadge,
+  PodInfoBadge,
+} from "./RequestDetailBadge";
 import "./RequestDetail.css";
 
 function AccordianHeader(props) {
@@ -30,6 +36,19 @@ function GridCol(props) {
         <h5>{props.title}</h5>
         <p>{props.content}</p>
       </div>
+    </Col>
+  );
+}
+
+function GridArray(props) {
+  return (
+    <Col className={props.IsLast ? null : "border-end"}>
+      <span
+        style={{ fontWeight: "normal", fontSize: 20, paddingRight: "0.5rem" }}
+      >
+        {props.title}
+      </span>
+      <span>{props.content}</span>
     </Col>
   );
 }
@@ -119,7 +138,6 @@ function RequestDetail(props) {
             </Container>
           </Accordion.Body>
         </Accordion.Item>
-
         <Accordion.Item eventKey="1">
           <AccordianHeader id={props.id} title={"프로비저닝 정보"} />
           <Accordion.Body
@@ -178,9 +196,41 @@ function RequestDetail(props) {
               ) : null}
             </Row>
             {DetailInfo.provision.dataplane_type === "nodegroup" ? (
-              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
-                <GridCol />
-              </Row>
+              <div>
+                <Row
+                  className="mb-2 border-top"
+                  style={{ paddingTop: "0.5rem" }}
+                >
+                  <Col
+                    style={{
+                      textAlign: "center",
+                      fontSize: 24,
+                      fontWeight: "bold",
+                      paddingRight: "1rem",
+                    }}
+                  >
+                    워커 노드 정보
+                  </Col>
+                </Row>
+                {DetailInfo.provision.ng_status.map((node, index) => (
+                  <Row
+                    key={index}
+                    className="border-top"
+                    style={{
+                      padding: "1rem",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <GridArray title={"이름"} content={node.node_name} />
+                    <GridArray
+                      title={"상태"}
+                      content={<NDInfoBadge status={node.node_status} />}
+                      IsLast={true}
+                    />
+                  </Row>
+                ))}
+              </div>
             ) : null}
           </Accordion.Body>
         </Accordion.Item>
@@ -190,15 +240,73 @@ function RequestDetail(props) {
             style={{ justifyContent: "start", textAlign: "left" }}
           >
             <Row className="mb-2">
-              <GridCol />
-              <GridCol />
-              <GridCol IsLast={true} />
+              <GridCol
+                title={"네임 스페이스 이름"}
+                content={DetailInfo.deploy.namespace_name}
+              />
+              <GridCol
+                title={"네임 스페이스 상태"}
+                content={
+                  DetailInfo.deploy.namespace_status === "Found"
+                    ? "활성화"
+                    : "비활성화"
+                }
+              />
+              <GridCol
+                title={"앱 이름"}
+                content={DetailInfo.deploy.deployment_name}
+              />
+              <GridCol
+                title={"앱 상태"}
+                content={DetailInfo.deploy.deployment_status}
+                IsLast={true}
+              />
             </Row>
             <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
-              <GridCol />
-              <GridCol />
-              <GridCol IsLast={true} />
+              <GridCol
+                title={"서비스 이름"}
+                content={DetailInfo.deploy.service_name}
+              />
+              <GridCol
+                title={"서비스 타입"}
+                content={DetailInfo.deploy.service_type}
+              />
+              <GridCol
+                title={"서비스 포트"}
+                content={DetailInfo.deploy.deployment_port}
+                IsLast={true}
+              />
             </Row>
+            <Row className="mb-2 border-top" style={{ paddingTop: "0.5rem" }}>
+              <Col
+                style={{
+                  textAlign: "center",
+                  fontSize: 24,
+                  fontWeight: "bold",
+                  paddingRight: "1rem",
+                }}
+              >
+                컨테이너(Pod) 정보
+              </Col>
+            </Row>
+            {DetailInfo.deploy.pod_status.map((pod, index) => (
+              <Row
+                key={index}
+                className="border-top"
+                style={{
+                  padding: "1rem",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <GridArray title={"이름"} content={pod.pod_name} />
+                <GridArray
+                  title={"상태"}
+                  content={<PodInfoBadge status={pod.pod_status} />}
+                  IsLast={true}
+                />
+              </Row>
+            ))}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

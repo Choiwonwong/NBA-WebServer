@@ -28,7 +28,10 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
       });
   }
   return (
-    <Container className="my-5 card-container">
+    <Container
+      className="my-5 card-container"
+      style={{ paddingBottom: "5rem" }}
+    >
       <Row className="p-4 pb-0 pe-lg-2 pt-lg-3 align-items-center rounded-5 border border-3 shadow-lg card">
         <Col lg={11} className="p-lg-2 pt-lg-4">
           <h1 className="display-5 fw-bold lh-1">{title}</h1>

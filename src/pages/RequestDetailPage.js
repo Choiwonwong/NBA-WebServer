@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Hero from "../components/Hero";
-import { Badge } from "react-bootstrap";
-import RequestDetail from "../components/RequestDetail";
-import { useParams } from "react-router-dom";
-import ApiUrl from "../components/ApiUrl";
 import axios from "axios";
+import { Badge } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import RequestDetail from "../components/RequestDetail";
+import ServiceLog from "../components/ServiceLog";
+import ApiUrl from "../components/ApiUrl";
+import Hero from "../components/Hero";
 
 function RequestDetailPage() {
   const { id } = useParams();
@@ -53,7 +54,7 @@ function RequestDetailPage() {
   return (
     <>
       <Hero currentPage="MainPage" />
-      <div className="px-4 my-2 text-center">
+      <div className="px-4 my-2 text-center" style={{ paddingBottom: "5rem" }}>
         <h1 className="display-5 fw-bold lh-1 mb-4">Quest Detail</h1>
         <hr style={{ width: "50%", margin: "auto" }} />
         {error ? (
@@ -80,6 +81,7 @@ function RequestDetailPage() {
               MetaInfo={requestsMetaInfo}
               DetailInfo={requestsDetailInfo}
             />
+            <ServiceLog progress={requestsMetaInfo.progress} />
           </>
         ) : (
           <p className="display-5 fw-bold lh-1" style={{ padding: "3rem" }}>

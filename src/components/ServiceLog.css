@@ -1,0 +1,12 @@
+.card-button {
+    transition: background-color 0.4s;
+}
+
+.card-button:hover {
+    transform: scale(1.2);
+    background-color: #446efd;
+    border-color: #446efd;
+    color: #fff;
+    /* 새로운 색상으로 변경 */
+    transition: transform 0.2s, background-color 0.3s, color 0.3s, border-color 0.3s;
+}

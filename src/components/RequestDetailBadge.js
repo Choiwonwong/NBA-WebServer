@@ -67,4 +67,44 @@ function DPInfoBadge({ status }) {
   );
 }
 
-export { MetaInfoBadge, EKSInfoBadge, DPInfoBadge };
+function NDInfoBadge({ status }) {
+  let variant = "secondary"; // 기본값
+
+  // 처리 상태에 따라 적절한 색상을 선택
+  if (status === "InService") {
+    variant = "success";
+  } else if (status === "Pending") {
+    variant = "danger";
+  } else {
+    variant = "warning";
+  }
+
+  return (
+    <Badge pill bg={variant} style={{ fontSize: 15, marginTop: "0.2rem" }}>
+      {status}
+    </Badge>
+  );
+}
+
+function PodInfoBadge({ status }) {
+  let variant = "secondary"; // 기본값
+
+  // 처리 상태에 따라 적절한 색상을 선택
+  if (status === "Running" || status === "Succeeded") {
+    variant = "success";
+  } else if (status === "ContainerCreating") {
+    variant = "primary";
+  } else if (status === "Unknown") {
+    variant = "warning";
+  } else {
+    variant = "danger";
+  }
+
+  return (
+    <Badge pill bg={variant} style={{ fontSize: 15, marginTop: "0.2rem" }}>
+      {status}
+    </Badge>
+  );
+}
+
+export { MetaInfoBadge, EKSInfoBadge, DPInfoBadge, NDInfoBadge, PodInfoBadge };

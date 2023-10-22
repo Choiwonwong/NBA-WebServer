@@ -121,7 +121,7 @@ function RequestsList(props) {
                 className="mx-auto card-button"
                 style={{
                   fontSize: "24px",
-                  width: "90%",
+                  width: "80%",
                   padding: "10px 20px", // 버튼 크기 조절
                 }}
                 onClick={() => {

@@ -277,6 +277,13 @@ function RequestDetail(props) {
                 IsLast={true}
               />
             </Row>
+            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+              <GridCol
+                title={"서비스 엔드포인트"}
+                content={DetailInfo.deploy.service_external_ip}
+                IsLast={true}
+              />
+            </Row>
             <Row className="mb-2 border-top" style={{ paddingTop: "0.5rem" }}>
               <Col
                 style={{

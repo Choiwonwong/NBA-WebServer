@@ -6,7 +6,7 @@ pipeline {
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential-v2'
         IMAGE_NAME = 'nba-web'
-        IMAGE_VERSION = "1.2.11"
+        IMAGE_VERSION = "1.2.12"
     }
     stages {
         stage('Checkout') {

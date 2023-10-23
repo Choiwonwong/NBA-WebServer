@@ -4,11 +4,11 @@
 }
 
 .card-container {
-    width: 75%;
+    width: 100%;
 }
 
-@media (min-width: 740px) {
+@media (min-width: 2000px) {
     .card-container {
-        width: 60%;
+        width: 50%;
     }
 }

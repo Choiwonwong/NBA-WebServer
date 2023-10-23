@@ -1,13 +1,6 @@
 .detail-acordion-container {
-    width: 80%;
+    width: 90%;
 }
-
-@media (min-width: 1000px) {
-    .detail-acordion-container {
-        width: 65%;
-    }
-}
-
 
 .card-button {
     transition: background-color 0.4s;

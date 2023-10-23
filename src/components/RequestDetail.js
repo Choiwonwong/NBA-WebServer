@@ -1,6 +1,5 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,6 +9,7 @@ import {
   DPInfoBadge,
   NDInfoBadge,
   PodInfoBadge,
+  DeployInfoBadge,
 } from "./RequestDetailBadge";
 import "./RequestDetail.css";
 
@@ -174,7 +174,11 @@ function RequestDetail(props) {
               />
               <GridCol
                 title={"데이터플레인 타입"}
-                content={DetailInfo.provision.dataplane_type}
+                content={
+                  DetailInfo.provision.dataplane_type === "nodegroup"
+                    ? "가상머신 기반"
+                    : "컨테이너 기반"
+                }
               />
               <GridCol
                 title={"데이터플레인 상태"}
@@ -258,7 +262,11 @@ function RequestDetail(props) {
               />
               <GridCol
                 title={"앱 상태"}
-                content={DetailInfo.deploy.deployment_status}
+                content={
+                  <DeployInfoBadge
+                    status={DetailInfo.deploy.deployment_status}
+                  />
+                }
                 IsLast={true}
               />
             </Row>

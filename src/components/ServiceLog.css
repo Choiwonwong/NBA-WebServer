@@ -25,10 +25,10 @@
     /* 그림자 설정 */
 }
 
-@media (max-width: 868px) {
+@media (max-width: 1500px) {
     .log-container {
         height: 50vh;
-        width: 100%;
+        width: 90%;
         /* 작은 화면에서 높이를 줄임 */
     }
 }

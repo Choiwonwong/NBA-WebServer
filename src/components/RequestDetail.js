@@ -304,24 +304,37 @@ function RequestDetail(props) {
                 컨테이너(Pod) 정보
               </Col>
             </Row>
-            {DetailInfo.deploy.pod_status.map((pod, index) => (
-              <Row
-                key={index}
-                className="border-top"
+
+            {DetailInfo.deploy.pod_status == "Not Found" ? (
+              <p
                 style={{
-                  padding: "1rem",
-                  display: "flex",
-                  alignItems: "center",
+                  textAlign: "center",
+                  fontSize: 20,
+                  paddingTop: "1rem",
                 }}
               >
-                <GridArray title={"이름"} content={pod.pod_name} />
-                <GridArray
-                  title={"상태"}
-                  content={<PodInfoBadge status={pod.pod_status} />}
-                  IsLast={true}
-                />
-              </Row>
-            ))}
+                현재 배포된 컨테이너가 없습니다.
+              </p>
+            ) : (
+              DetailInfo.deploy.pod_status.map((pod, index) => (
+                <Row
+                  key={index}
+                  className="border-top"
+                  style={{
+                    padding: "1rem",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <GridArray title={"이름"} content={pod.pod_name} />
+                  <GridArray
+                    title={"상태"}
+                    content={<PodInfoBadge status={pod.pod_status} />}
+                    IsLast={true}
+                  />
+                </Row>
+              ))
+            )}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

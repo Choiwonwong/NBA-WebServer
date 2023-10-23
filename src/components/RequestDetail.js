@@ -90,7 +90,7 @@ function RequestDetail(props) {
                       : MetaInfo.requestType
                   }
                 />
-                <GridCol title={"단계"} content={MetaInfo.progress} />
+                <GridCol title={"단계"} content={MetaInfo.progress + "단계"} />
                 <GridCol
                   title={"요청 시간"}
                   content={formatDate(MetaInfo.createdAt)}

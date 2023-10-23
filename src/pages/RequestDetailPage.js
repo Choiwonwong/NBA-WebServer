@@ -81,8 +81,7 @@ function RequestDetailPage() {
               MetaInfo={requestsMetaInfo}
               DetailInfo={requestsDetailInfo}
             />
-            {/* <ServiceLog progress={requestsMetaInfo.progress} /> */}
-            <ServiceLog progress={"배포 단계"} id={id} />
+            <ServiceLog progress={requestsMetaInfo.progress} />
           </>
         ) : (
           <p className="display-5 fw-bold lh-1" style={{ padding: "3rem" }}>

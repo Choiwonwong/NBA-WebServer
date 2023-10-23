@@ -54,7 +54,7 @@ function ServiceLog(props) {
           marginTop: "1rem",
           fontSize: 32,
         }}
-        disabled={props.progress === "처리 단계" || isLoading ? true : false}
+        disabled={props.progress === "처리" || isLoading ? true : false}
         onClick={handleLogButtonClick}
       >
         {isLoading

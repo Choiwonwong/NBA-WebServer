@@ -73,6 +73,14 @@
     /* Move text up initially */
 }
 
+.rainbow-text-not-data {
+    font-size: 2rem;
+    cursor: pointer;
+    animation: bounce 1s infinite, move 2s infinite;
+    transform: translateY(-100px);
+    margin-top: 15rem;
+}
+
 .color-0 {
     color: red;
 }

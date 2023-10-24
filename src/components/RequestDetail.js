@@ -174,11 +174,7 @@ function RequestDetail(props) {
               />
               <GridCol
                 title={"데이터플레인 타입"}
-                content={
-                  DetailInfo.provision.dataplane_type === "nodegroup"
-                    ? "가상머신 기반"
-                    : "컨테이너 기반"
-                }
+                content={DetailInfo.provision.dataplane_type + " 기반"}
               />
               <GridCol
                 title={"데이터플레인 상태"}
@@ -191,51 +187,45 @@ function RequestDetail(props) {
                     : true
                 }
               />
-              {DetailInfo.provision.dataplane_type === "nodegroup" ? (
-                <GridCol
-                  title={"가상머신 개수"}
-                  content={DetailInfo.provision.ng_current_count}
-                  IsLast={true}
-                />
-              ) : null}
+              <GridCol
+                title={"가상머신 개수"}
+                content={DetailInfo.provision.ng_current_count}
+                IsLast={true}
+              />
             </Row>
-            {DetailInfo.provision.dataplane_type === "nodegroup" ? (
-              <div>
-                <Row
-                  className="mb-2 border-top"
-                  style={{ paddingTop: "0.5rem" }}
+
+            <div>
+              <Row className="mb-2 border-top" style={{ paddingTop: "0.5rem" }}>
+                <Col
+                  style={{
+                    textAlign: "center",
+                    fontSize: 24,
+                    fontWeight: "bold",
+                    paddingRight: "1rem",
+                  }}
                 >
-                  <Col
-                    style={{
-                      textAlign: "center",
-                      fontSize: 24,
-                      fontWeight: "bold",
-                      paddingRight: "1rem",
-                    }}
-                  >
-                    워커 노드 정보
-                  </Col>
+                  가상머신 정보
+                </Col>
+              </Row>
+              {DetailInfo.provision.ng_status.map((node, index) => (
+                <Row
+                  key={index}
+                  className="border-top"
+                  style={{
+                    padding: "1rem",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <GridArray title={"이름"} content={node.node_name} />
+                  <GridArray
+                    title={"상태"}
+                    content={<NDInfoBadge status={node.node_status} />}
+                    IsLast={true}
+                  />
                 </Row>
-                {DetailInfo.provision.ng_status.map((node, index) => (
-                  <Row
-                    key={index}
-                    className="border-top"
-                    style={{
-                      padding: "1rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <GridArray title={"이름"} content={node.node_name} />
-                    <GridArray
-                      title={"상태"}
-                      content={<NDInfoBadge status={node.node_status} />}
-                      IsLast={true}
-                    />
-                  </Row>
-                ))}
-              </div>
-            ) : null}
+              ))}
+            </div>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="2">

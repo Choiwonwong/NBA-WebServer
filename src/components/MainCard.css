@@ -1,14 +1,18 @@
-.card:hover {
-    transform: scale(1.1);
+/* .docu-container:hover {
+    transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
-}
+} */
 
-.card-container {
+.docu-container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (min-width: 2000px) {
-    .card-container {
-        width: 50%;
+@media (min-width: 1400px) {
+    .docu-container {
+        width: 100vh;
     }
 }

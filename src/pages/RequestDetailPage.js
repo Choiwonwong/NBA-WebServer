@@ -5,6 +5,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import RequestDetail from "../components/RequestDetail";
 import ServiceLog from "../components/ServiceLog";
 import ApiUrl from "../components/ApiUrl";
+import "./NotFound.css"; // You can create a CSS file for styling
 import Hero from "../components/Hero";
 
 function RequestDetailPage() {
@@ -58,15 +59,12 @@ function RequestDetailPage() {
         <h1 className="display-5 fw-bold lh-1 mb-4">Quest Detail</h1>
         <hr style={{ width: "50%", margin: "auto" }} />
         {error ? (
-          <p
-            className=" px-4 my-2 text-center"
-            style={{ fontSize: 30, paddingTop: "1.5rem" }}
-          >
-            <Badge bg="danger" style={{ marginRight: "1rem" }}>
-              Failed
-            </Badge>
-            {error}
-          </p>
+          <>
+            <h1 className={`rainbow-text-not-data `}>
+              <Badge bg="danger">Failed</Badge>
+              해당 데이터는 존재하지 않습니다.
+            </h1>
+          </>
         ) : // 데이터가 로드될 때만 데이터를 표시
         requestsMetaInfo !== null && requestsDetailInfo !== null ? (
           <>

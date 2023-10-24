@@ -6,7 +6,7 @@ pipeline {
         ACCOUNT_ID='622164100401'
         AWS_CREDENTIAL_NAME='NBA-AWS-Credential-v2'
         IMAGE_NAME = 'quest-web'
-        IMAGE_VERSION = "0.0.1"
+        IMAGE_VERSION = "0.0.2"
     }
     stages {
         stage('Checkout') {
@@ -16,28 +16,6 @@ pipeline {
                     url: 'https://github.com/Choiwonwong/NBA-WebServer.git'
             }
         }
-        // stage('Get API EndPoint'){
-        //     steps {
-        //         script {
-        //             sh 'rm -f .env.production'
-        //             sh '''
-        //             touch .env.production
-        //             echo "REACT_APP_API_URL=$(kubectl get svc nba-api-service -n api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')" >> .env.production
-        //             echo "REACT_APP_API_PORT=8000" >> .env.production
-        //             '''
-        //         }
-        //     }
-        // }
-        // stage('Change nginx.conf'){
-        //     steps{
-        //         script{
-        //             sh '''
-        //             NEW_DNS=$(kubectl get svc nba-web-service -n web -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-        //             sed -i "s/localhost/\$NEW_DNS/" nginx.conf
-        //             '''
-        //         }
-        //     }
-        // }
         stage('build') {
             steps {
                 sh '''

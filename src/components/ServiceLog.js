@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 import { CodeBlock } from "react-code-blocks";
 import ApiUrl from "./ApiUrl";
 import "./ServiceLog.css";
@@ -7,6 +7,7 @@ function ServiceLog(props) {
   const [logs, setLogs] = useState([]);
   const [showLogs, setShowLogs] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [logError, setLogError] = useState(false);
 
   useEffect(() => {
     if (showLogs) {
@@ -15,20 +16,29 @@ function ServiceLog(props) {
       );
 
       eventSource.onopen = () => {
+        setLogError(false);
         setTimeout(() => {
           setIsLoading(false);
-        }, 1000);
+        }, 3000);
       };
 
       eventSource.onmessage = (event) => {
-        // 이벤트 데이터 처리
+        console.log(event.data);
         setLogs((prevLogs) => [...prevLogs, event.data]);
       };
 
-      // eventSource.onend = () => {
-      // eventSource.close();
-      // setLogs([]);
-      // };
+      eventSource.onerror = (e) => {
+        // 종료 또는 에러 발생 시 할 일
+        eventSource.close();
+        // setIsLoading(false);
+        // setShowLogs(false);
+        setTimeout(() => {
+          setLogs([]);
+          setIsLoading(false);
+          setShowLogs(false);
+          setLogError(true);
+        }, 2500);
+      };
 
       // 컴포넌트 언마운트 시 EventSource 닫기 + connection Close
       return () => {
@@ -61,8 +71,17 @@ function ServiceLog(props) {
           ? "Loading..."
           : showLogs
           ? "로그 닫기"
-          : "현재 단계 로그 확인"}
+          : props.progress + " 단계 로그 확인"}
       </Button>
+
+      {logError ? (
+        <h5 style={{ margin: "1.5rem" }}>
+          <Badge bg="danger" style={{ marginRight: "0.5rem" }}>
+            Failed
+          </Badge>
+          로그 수집에 문제가 발생했습니다. 조금 후에 다시 시도해주세요
+        </h5>
+      ) : null}
 
       {showLogs && !isLoading && (
         <div className="log-container">

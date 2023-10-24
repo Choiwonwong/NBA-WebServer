@@ -17,8 +17,10 @@ spec:
     spec:
       containers:
         - name: nba-web
-          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:1.3.4
+          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:1.3.5
           ports:
             - name: http
               containerPort: 80
+            - name: https
+              containerPort: 443
           imagePullPolicy: IfNotPresent

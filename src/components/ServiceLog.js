@@ -12,7 +12,7 @@ function ServiceLog(props) {
   useEffect(() => {
     if (showLogs) {
       const eventSource = new EventSource(
-        `${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/${props.id}/logs`
+        `${ApiUrl.apiUrl}/requests/${props.id}/logs`
       );
 
       eventSource.onopen = () => {

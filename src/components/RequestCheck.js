@@ -33,7 +33,7 @@ function RequestCheck(props) {
         formData.append("file", selectedFile);
 
         const response = await axios.post(
-          `${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/check`,
+          `${ApiUrl.apiUrl}/requests/check`,
           formData
         );
 

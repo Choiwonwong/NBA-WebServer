@@ -17,7 +17,7 @@ function RequestConfirm({ title, description, questYaml, processedQuestYaml }) {
     const formData = new FormData();
     formData.append("file", questYaml.questYamlData);
     await axios
-      .post(`${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/`, formData)
+      .post(`${ApiUrl.apiUrl}/requests/`, formData)
       .then(() => {
         setIsLoading(false);
         navigate("/requests");

@@ -13,9 +13,7 @@ function RequestListPage() {
 
   const fetchRequests = async () => {
     try {
-      const response = await axios.get(
-        `${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/`
-      );
+      const response = await axios.get(`${ApiUrl.apiUrl}/requests/`);
       const reveredData = response.data.reverse();
       setRequests(reveredData);
     } catch (e) {

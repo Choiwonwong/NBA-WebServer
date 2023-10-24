@@ -18,9 +18,7 @@ function RequestDetailPage() {
 
   const fetchRequestMetaInfo = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/${id}`
-      );
+      const response = await axios.get(`${ApiUrl.apiUrl}/requests/${id}`);
       const reveredData = response.data;
       setRequestsMetaInfo(reveredData);
       setIsDataFetched(true); // 데이터를 불러왔음을 표시
@@ -33,7 +31,7 @@ function RequestDetailPage() {
   const fetchRequestDetailInfo = useCallback(async () => {
     try {
       const response = await axios.get(
-        `${ApiUrl.apiUrl}:${ApiUrl.apiPort}/api/requests/${id}/details/`
+        `${ApiUrl.apiUrl}/requests/${id}/details/`
       );
       const reveredData = response.data;
       setRequestsDetailInfo(reveredData);

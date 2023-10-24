@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { MetaInfoBadge } from "./RequestDetailBadge";
 
 function RequestsList(props) {
   const [badgeState, setBadgeState] = useState(["primary", "진행"]);
@@ -89,19 +90,25 @@ function RequestsList(props) {
             <Col className="border-end">
               <div>
                 <h5>처리 상태</h5>
-                <p>{props.processState || "대기"}</p>
+                <p>
+                  <MetaInfoBadge status={props.processState} />
+                </p>
               </div>
             </Col>
             <Col className="border-end">
               <div>
                 <h5>프로비저닝 상태</h5>
-                <p>{props.provisionState || "대기"}</p>
+                <p>
+                  <MetaInfoBadge status={props.provisionState} />
+                </p>
               </div>
             </Col>
             <Col>
               <div>
                 <h5>배포 상태</h5>
-                <p>{props.deployState || "대기"}</p>
+                <p>
+                  <MetaInfoBadge status={props.deployState} />
+                </p>
               </div>
             </Col>
           </Row>

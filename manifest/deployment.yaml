@@ -1,26 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nba-web
-  namespace: web
-  labels:
-    app: nba-web
+  name: quest-web
+  namespace: quest
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nba-web
+      app.kubernetes.io/name: quest-web
   template:
     metadata:
       labels:
-        app: nba-web
+        app.kubernetes.io/name: quest-web
     spec:
       containers:
-        - name: nba-web
-          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/nba-web:test-1
+        - name: quest-web-ctn
+          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/quest-web:0.0.0
           ports:
             - name: http
               containerPort: 80
-            - name: https
-              containerPort: 443
-          imagePullPolicy: IfNotPresent

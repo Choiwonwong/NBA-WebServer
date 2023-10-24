@@ -1,6 +1,6 @@
 const ApiUrl = {
-  apiUrl: "http://" + process.env.REACT_APP_API_URL,
-  apiPort: process.env.REACT_APP_API_PORT,
+  apiUrl: "https://quest-nba.com/api",
+  apiPort: 8000,
 };
 
 export default ApiUrl;

@@ -3,6 +3,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Badge } from "react-bootstrap";
 import {
   MetaInfoBadge,
   EKSInfoBadge,
@@ -34,7 +35,13 @@ function GridCol(props) {
     <Col className={props.IsLast ? null : "border-end"}>
       <div>
         <h5>{props.title}</h5>
-        <p>{props.content}</p>
+        {props.content === "Not Found" ? (
+          <Badge pill bg={"danger"}>
+            {props.content}
+          </Badge>
+        ) : (
+          <p>{props.content}</p>
+        )}
       </div>
     </Col>
   );
@@ -193,8 +200,100 @@ function RequestDetail(props) {
                 IsLast={true}
               />
             </Row>
-
-            <div>
+            {DetailInfo.deploy.eks_present === true ? (
+              <div>
+                <Row
+                  className="mb-2 border-top"
+                  style={{ paddingTop: "0.5rem" }}
+                >
+                  <Col
+                    style={{
+                      textAlign: "center",
+                      fontSize: 24,
+                      fontWeight: "bold",
+                      paddingRight: "1rem",
+                    }}
+                  >
+                    가상머신 정보
+                  </Col>
+                </Row>
+                {DetailInfo.provision.ng_status.map((node, index) => (
+                  <Row
+                    key={index}
+                    className="border-top"
+                    style={{
+                      padding: "1rem",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <GridArray title={"이름"} content={node.node_name} />
+                    <GridArray
+                      title={"상태"}
+                      content={<NDInfoBadge status={node.node_status} />}
+                      IsLast={true}
+                    />
+                  </Row>
+                ))}
+              </div>
+            ) : null}
+          </Accordion.Body>
+        </Accordion.Item>
+        {DetailInfo.deploy.eks_present === true ? (
+          <Accordion.Item eventKey="2">
+            <AccordianHeader id={props.id} title={"배포 정보"} />
+            <Accordion.Body
+              style={{ justifyContent: "start", textAlign: "left" }}
+            >
+              <Row className="mb-2">
+                <GridCol
+                  title={"네임 스페이스 이름"}
+                  content={DetailInfo.deploy.namespace_name}
+                />
+                <GridCol
+                  title={"네임 스페이스 상태"}
+                  content={
+                    DetailInfo.deploy.namespace_status === "Found"
+                      ? "활성화"
+                      : "비활성화"
+                  }
+                />
+                <GridCol
+                  title={"앱 이름"}
+                  content={DetailInfo.deploy.deployment_name}
+                />
+                <GridCol
+                  title={"앱 상태"}
+                  content={
+                    <DeployInfoBadge
+                      status={DetailInfo.deploy.deployment_status}
+                    />
+                  }
+                  IsLast={true}
+                />
+              </Row>
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+                <GridCol
+                  title={"서비스 이름"}
+                  content={DetailInfo.deploy.service_name}
+                />
+                <GridCol
+                  title={"서비스 타입"}
+                  content={DetailInfo.deploy.service_type}
+                />
+                <GridCol
+                  title={"서비스 포트"}
+                  content={DetailInfo.deploy.deployment_port}
+                  IsLast={true}
+                />
+              </Row>
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+                <GridCol
+                  title={"서비스 엔드포인트"}
+                  content={DetailInfo.deploy.service_external_ip}
+                  IsLast={true}
+                />
+              </Row>
               <Row className="mb-2 border-top" style={{ paddingTop: "0.5rem" }}>
                 <Col
                   style={{
@@ -204,129 +303,43 @@ function RequestDetail(props) {
                     paddingRight: "1rem",
                   }}
                 >
-                  가상머신 정보
+                  컨테이너(Pod) 정보
                 </Col>
               </Row>
-              {DetailInfo.provision.ng_status.map((node, index) => (
-                <Row
-                  key={index}
-                  className="border-top"
-                  style={{
-                    padding: "1rem",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <GridArray title={"이름"} content={node.node_name} />
-                  <GridArray
-                    title={"상태"}
-                    content={<NDInfoBadge status={node.node_status} />}
-                    IsLast={true}
-                  />
-                </Row>
-              ))}
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="2">
-          <AccordianHeader id={props.id} title={"배포 정보"} />
-          <Accordion.Body
-            style={{ justifyContent: "start", textAlign: "left" }}
-          >
-            <Row className="mb-2">
-              <GridCol
-                title={"네임 스페이스 이름"}
-                content={DetailInfo.deploy.namespace_name}
-              />
-              <GridCol
-                title={"네임 스페이스 상태"}
-                content={
-                  DetailInfo.deploy.namespace_status === "Found"
-                    ? "활성화"
-                    : "비활성화"
-                }
-              />
-              <GridCol
-                title={"앱 이름"}
-                content={DetailInfo.deploy.deployment_name}
-              />
-              <GridCol
-                title={"앱 상태"}
-                content={
-                  <DeployInfoBadge
-                    status={DetailInfo.deploy.deployment_status}
-                  />
-                }
-                IsLast={true}
-              />
-            </Row>
-            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
-              <GridCol
-                title={"서비스 이름"}
-                content={DetailInfo.deploy.service_name}
-              />
-              <GridCol
-                title={"서비스 타입"}
-                content={DetailInfo.deploy.service_type}
-              />
-              <GridCol
-                title={"서비스 포트"}
-                content={DetailInfo.deploy.deployment_port}
-                IsLast={true}
-              />
-            </Row>
-            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
-              <GridCol
-                title={"서비스 엔드포인트"}
-                content={DetailInfo.deploy.service_external_ip}
-                IsLast={true}
-              />
-            </Row>
-            <Row className="mb-2 border-top" style={{ paddingTop: "0.5rem" }}>
-              <Col
-                style={{
-                  textAlign: "center",
-                  fontSize: 24,
-                  fontWeight: "bold",
-                  paddingRight: "1rem",
-                }}
-              >
-                컨테이너(Pod) 정보
-              </Col>
-            </Row>
 
-            {DetailInfo.deploy.pod_status === "Not Found" ? (
-              <p
-                style={{
-                  textAlign: "center",
-                  fontSize: 20,
-                  paddingTop: "1rem",
-                }}
-              >
-                현재 배포된 컨테이너가 없습니다.
-              </p>
-            ) : (
-              DetailInfo.deploy.pod_status.map((pod, index) => (
-                <Row
-                  key={index}
-                  className="border-top"
+              {DetailInfo.deploy.pod_status === "Not Found" ? (
+                <p
                   style={{
-                    padding: "1rem",
-                    display: "flex",
-                    alignItems: "center",
+                    textAlign: "center",
+                    fontSize: 20,
+                    paddingTop: "1rem",
                   }}
                 >
-                  <GridArray title={"이름"} content={pod.pod_name} />
-                  <GridArray
-                    title={"상태"}
-                    content={<PodInfoBadge status={pod.pod_status} />}
-                    IsLast={true}
-                  />
-                </Row>
-              ))
-            )}
-          </Accordion.Body>
-        </Accordion.Item>
+                  현재 배포된 컨테이너가 없습니다.
+                </p>
+              ) : (
+                DetailInfo.deploy.pod_status.map((pod, index) => (
+                  <Row
+                    key={index}
+                    className="border-top"
+                    style={{
+                      padding: "1rem",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <GridArray title={"이름"} content={pod.pod_name} />
+                    <GridArray
+                      title={"상태"}
+                      content={<PodInfoBadge status={pod.pod_status} />}
+                      IsLast={true}
+                    />
+                  </Row>
+                ))
+              )}
+            </Accordion.Body>
+          </Accordion.Item>
+        ) : null}
       </Accordion>
     </Container>
   );

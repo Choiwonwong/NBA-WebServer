@@ -1,6 +1,5 @@
 const ApiUrl = {
-  // apiUrl: "https://quest-nba.com/api",
-  apiUrl: "http://localhost:8000/api",
+  apiUrl: "https://quest-nba.com/api",
 };
 
 export default ApiUrl;

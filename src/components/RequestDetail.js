@@ -126,12 +126,6 @@ function RequestDetail(props) {
                 className="border-top justify-content-center"
                 style={{ paddingTop: "1rem" }}
               >
-                <Col sm={3} className="d-flex align-items-center border-end">
-                  <div>
-                    <h5>{"시도 횟수"}</h5>
-                    <p>{MetaInfo.tries}</p>
-                  </div>
-                </Col>
                 <GridCol
                   title={"에러 메시지"}
                   content={
@@ -145,101 +139,103 @@ function RequestDetail(props) {
             </Container>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <AccordianHeader id={props.id} title={"프로비저닝 정보"} />
-          <Accordion.Body
-            style={{ justifyContent: "start", textAlign: "left" }}
-          >
-            <Row className="mb-2">
-              <GridCol
-                title={"클러스터 이름"}
-                content={DetailInfo.provision.eks_name}
-              />
-              <GridCol
-                title={"클러스터 버전"}
-                content={DetailInfo.provision.eks_version}
-              />
-              <GridCol
-                title={"클러스터 상태"}
-                content={
-                  <EKSInfoBadge status={DetailInfo.provision.eks_status} />
-                }
-                IsLast={true}
-              />
-            </Row>
-            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
-              <GridCol
-                title={"클러스터 엔드포인트"}
-                content={DetailInfo.provision.eks_endpoint}
-                IsLast={true}
-              />
-            </Row>
-            <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
-              <GridCol
-                title={"데이터플레인 이름"}
-                content={DetailInfo.provision.dataplane_name}
-              />
-              <GridCol
-                title={"데이터플레인 타입"}
-                content={DetailInfo.provision.dataplane_type + " 기반"}
-              />
-              <GridCol
-                title={"데이터플레인 상태"}
-                content={
-                  <DPInfoBadge status={DetailInfo.provision.dp_status} />
-                }
-                IsLast={
-                  DetailInfo.provision.dataplane_type === "nodegroup"
-                    ? false
-                    : true
-                }
-              />
-              <GridCol
-                title={"가상머신 개수"}
-                content={DetailInfo.provision.ng_current_count}
-                IsLast={true}
-              />
-            </Row>
-            {DetailInfo.deploy.eks_present === true ? (
-              <div>
-                <Row
-                  className="mb-2 border-top"
-                  style={{ paddingTop: "0.5rem" }}
-                >
-                  <Col
-                    style={{
-                      textAlign: "center",
-                      fontSize: 24,
-                      fontWeight: "bold",
-                      paddingRight: "1rem",
-                    }}
-                  >
-                    가상머신 정보
-                  </Col>
-                </Row>
-                {DetailInfo.provision.ng_status.map((node, index) => (
+        {DetailInfo.eks_present === true ? (
+          <Accordion.Item eventKey="1">
+            <AccordianHeader id={props.id} title={"프로비저닝 정보"} />
+            <Accordion.Body
+              style={{ justifyContent: "start", textAlign: "left" }}
+            >
+              <Row className="mb-2">
+                <GridCol
+                  title={"클러스터 이름"}
+                  content={DetailInfo.provision.eks_name}
+                />
+                <GridCol
+                  title={"클러스터 버전"}
+                  content={DetailInfo.provision.eks_version}
+                />
+                <GridCol
+                  title={"클러스터 상태"}
+                  content={
+                    <EKSInfoBadge status={DetailInfo.provision.eks_status} />
+                  }
+                  IsLast={true}
+                />
+              </Row>
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+                <GridCol
+                  title={"클러스터 엔드포인트"}
+                  content={DetailInfo.provision.eks_endpoint}
+                  IsLast={true}
+                />
+              </Row>
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+                <GridCol
+                  title={"데이터플레인 이름"}
+                  content={DetailInfo.provision.dataplane_name}
+                />
+                <GridCol
+                  title={"데이터플레인 타입"}
+                  content={DetailInfo.provision.dataplane_type + " 기반"}
+                />
+                <GridCol
+                  title={"데이터플레인 상태"}
+                  content={
+                    <DPInfoBadge status={DetailInfo.provision.dp_status} />
+                  }
+                  IsLast={
+                    DetailInfo.provision.dataplane_type === "nodegroup"
+                      ? false
+                      : true
+                  }
+                />
+                <GridCol
+                  title={"가상머신 개수"}
+                  content={DetailInfo.provision.ng_current_count}
+                  IsLast={true}
+                />
+              </Row>
+              {DetailInfo.ng_present === true ? (
+                <div>
                   <Row
-                    key={index}
-                    className="border-top"
-                    style={{
-                      padding: "1rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
+                    className="mb-2 border-top"
+                    style={{ paddingTop: "0.5rem" }}
                   >
-                    <GridArray title={"이름"} content={node.node_name} />
-                    <GridArray
-                      title={"상태"}
-                      content={<NDInfoBadge status={node.node_status} />}
-                      IsLast={true}
-                    />
+                    <Col
+                      style={{
+                        textAlign: "center",
+                        fontSize: 24,
+                        fontWeight: "bold",
+                        paddingRight: "1rem",
+                      }}
+                    >
+                      가상머신 정보
+                    </Col>
                   </Row>
-                ))}
-              </div>
-            ) : null}
-          </Accordion.Body>
-        </Accordion.Item>
-        {DetailInfo.deploy.eks_present === true ? (
+                  {DetailInfo.provision.ng_status.map((node, index) => (
+                    <Row
+                      key={index}
+                      className="border-top"
+                      style={{
+                        padding: "1rem",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <GridArray title={"이름"} content={node.node_name} />
+                      <GridArray
+                        title={"상태"}
+                        content={<NDInfoBadge status={node.node_status} />}
+                        IsLast={true}
+                      />
+                    </Row>
+                  ))}
+                </div>
+              ) : null}
+            </Accordion.Body>
+          </Accordion.Item>
+        ) : null}
+        {DetailInfo.eks_active === true ? (
           <Accordion.Item eventKey="2">
             <AccordianHeader id={props.id} title={"배포 정보"} />
             <Accordion.Body

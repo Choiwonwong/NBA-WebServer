@@ -27,18 +27,18 @@ function ServiceLog(props) {
         setLogs((prevLogs) => [...prevLogs, event.data]);
       };
 
-      eventSource.onerror = (e) => {
-        // 종료 또는 에러 발생 시 할 일
-        eventSource.close();
-        // setIsLoading(false);
-        // setShowLogs(false);
-        setTimeout(() => {
-          setLogs([]);
-          setIsLoading(false);
-          setShowLogs(false);
-          setLogError(true);
-        }, 2500);
-      };
+      // eventSource.onerror = (e) => {
+      //   // 종료 또는 에러 발생 시 할 일
+      //   eventSource.close();
+      //   // setIsLoading(false);
+      //   // setShowLogs(false);
+      //   setTimeout(() => {
+      //     setLogs([]);
+      //     setIsLoading(false);
+      //     setShowLogs(false);
+      //     setLogError(true);
+      //   }, 2500);
+      // };
 
       // 컴포넌트 언마운트 시 EventSource 닫기 + connection Close
       return () => {
@@ -64,7 +64,13 @@ function ServiceLog(props) {
           marginTop: "1rem",
           fontSize: 32,
         }}
-        disabled={props.progress === "처리" || isLoading ? true : false}
+        disabled={
+          props.progress === "처리" ||
+          isLoading ||
+          (props.progress === "배포" && props.progress === "배포")
+            ? true
+            : false
+        }
         onClick={handleLogButtonClick}
       >
         {isLoading

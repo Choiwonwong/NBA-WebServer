@@ -12,23 +12,19 @@
 }
 
 .log-container {
-    width: 50%;
+    width: 55%;
     height: 75vh;
     margin: 1.5rem auto;
     padding-left: 0.5rem;
-
     overflow-y: auto;
     background-color: #f4f4f4;
     border: 1px solid #ccc;
-    /* 테두리 스타일 및 색상 설정 */
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    /* 그림자 설정 */
 }
 
 @media (max-width: 1500px) {
     .log-container {
         height: 50vh;
-        width: 90%;
-        /* 작은 화면에서 높이를 줄임 */
+        width: 100%;
     }
 }

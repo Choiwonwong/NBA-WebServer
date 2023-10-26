@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Badge, Button, Container } from "react-bootstrap";
 import { CodeBlock } from "react-code-blocks";
 import ApiUrl from "./ApiUrl";
@@ -8,32 +8,34 @@ function ServiceLog(props) {
   const [showLogs, setShowLogs] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [logError, setLogError] = useState(false);
+  const eventSourceRef = useRef(null);
 
   useEffect(() => {
     if (showLogs) {
-      const eventSource = new EventSource(
+      eventSourceRef.current = new EventSource(
         `${ApiUrl.apiUrl}/requests/${props.id}/logs`
       );
 
-      eventSource.onopen = () => {
+      eventSourceRef.current.onopen = () => {
         setLogError(false);
         setTimeout(() => {
           setIsLoading(false);
         }, 3000);
       };
-      eventSource.onmessage = (event) => {
-        console.log(event.data);
-        setLogs((prevLogs) => [...prevLogs, event.data]);
-      };
-      // 컴포넌트 언마운트 시 EventSource 닫기 + connection Close
-      return () => {
-        eventSource.close();
-        setLogs([]);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
+      // 새로운 로그 메시지가 도착할 때마다 logs 배열에 추가
+      eventSourceRef.current.onmessage = (event) => {
+        const newLog = event.data;
+        setLogs((prevLogs) => [...prevLogs, newLog]);
       };
     }
+
+    return () => {
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+      setLogs([]); // 컴포넌트 언마운트 시 로그 초기화
+      setIsLoading(false);
+    };
   }, [showLogs, props.id]);
 
   const handleLogButtonClick = () => {
@@ -52,7 +54,7 @@ function ServiceLog(props) {
         disabled={
           props.progress === "처리" ||
           isLoading ||
-          (props.progress === "배포" && props.deployState === "success")
+          (props.progress === "배포" && props.deployState !== "start")
             ? true
             : false
         }
@@ -79,11 +81,10 @@ function ServiceLog(props) {
           <CodeBlock
             text={logs.join("\n")} // 배열을 개행문자로 연결하여 문자열로 변환
             language="shell"
-            showLineNumbers={false}
             customStyle={{
+              textAlign: "left",
               backgroundColor: "#f4f4f4",
             }}
-            wrapLongLines={true}
             codeContainerStyle={{
               color: "#2a2934",
             }}

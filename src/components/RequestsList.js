@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
-import StackedProgressBar from "./StackedProgressBar";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -18,7 +17,9 @@ function RequestsList(props) {
       setBadgeState(["success", "성공"]);
     }
     if (
-      "failed" in [props.processState, props.provisionState, props.deployState]
+      props.processState === "failed" ||
+      props.provisionState === "failed" ||
+      props.deployState === "failed"
     ) {
       setBadgeState(["danger", "실패"]);
     }
@@ -59,8 +60,6 @@ function RequestsList(props) {
         <div style={{ fontSize: 20 }}>{props.requestTitle}</div>
       </Accordion.Header>
       <Accordion.Body>
-        <StackedProgressBar />
-        <hr />
         <Container>
           <Row className="mb-2">
             <Col className="border-end">

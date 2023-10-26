@@ -60,6 +60,26 @@ function GridArray(props) {
   );
 }
 
+function InfoHeader({ title, isFirst }) {
+  return (
+    <Row
+      className={isFirst === true ? "mb-2" : "mb-2 border-top"}
+      style={isFirst === true ? {} : { paddingTop: "0.5rem" }}
+    >
+      <Col
+        style={{
+          textAlign: "center",
+          fontSize: 24,
+          fontWeight: "bold",
+          paddingRight: "1rem",
+        }}
+      >
+        {title}
+      </Col>
+    </Row>
+  );
+}
+
 function RequestDetail(props) {
   const { MetaInfo, DetailInfo } = props;
 
@@ -119,6 +139,7 @@ function RequestDetail(props) {
                 />
                 <GridCol
                   title={"배포 상태"}
+                  IsLast={true}
                   content={<MetaInfoBadge status={MetaInfo.deployState} />}
                 />
               </Row>
@@ -145,7 +166,28 @@ function RequestDetail(props) {
             <Accordion.Body
               style={{ justifyContent: "start", textAlign: "left" }}
             >
-              <Row className="mb-2">
+              <InfoHeader title={"VPC 정보"} isFirst={true} />
+              <Row className="mb-2 border-top" style={{ paddingTop: "0.5rem" }}>
+                <GridCol
+                  title={"VPC 이름"}
+                  content={
+                    DetailInfo.provision.vpc_name === null
+                      ? "찾지 못함"
+                      : DetailInfo.provision.vpc_name
+                  }
+                />
+                <GridCol
+                  title={"Public 서브넷 개수"}
+                  content={DetailInfo.provision.public_subnet_count}
+                />
+                <GridCol
+                  title={"Private 서브넷 개수"}
+                  content={DetailInfo.provision.private_subnet_count}
+                  IsLast={true}
+                />
+              </Row>
+              <InfoHeader title={"EKS 정보"} isFirst={false} />
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
                 <GridCol
                   title={"클러스터 이름"}
                   content={DetailInfo.provision.eks_name}
@@ -183,11 +225,6 @@ function RequestDetail(props) {
                   content={
                     <DPInfoBadge status={DetailInfo.provision.dp_status} />
                   }
-                  IsLast={
-                    DetailInfo.provision.dataplane_type === "nodegroup"
-                      ? false
-                      : true
-                  }
                 />
                 <GridCol
                   title={"가상머신 개수"}
@@ -197,21 +234,7 @@ function RequestDetail(props) {
               </Row>
               {DetailInfo.ng_present === true ? (
                 <div>
-                  <Row
-                    className="mb-2 border-top"
-                    style={{ paddingTop: "0.5rem" }}
-                  >
-                    <Col
-                      style={{
-                        textAlign: "center",
-                        fontSize: 24,
-                        fontWeight: "bold",
-                        paddingRight: "1rem",
-                      }}
-                    >
-                      가상머신 정보
-                    </Col>
-                  </Row>
+                  <InfoHeader title={"가상머신 정보"} isFirst={false} />
                   {DetailInfo.provision.ng_status.map((node, index) => (
                     <Row
                       key={index}
@@ -241,7 +264,8 @@ function RequestDetail(props) {
             <Accordion.Body
               style={{ justifyContent: "start", textAlign: "left" }}
             >
-              <Row className="mb-2">
+              <InfoHeader title={"배포 기본 정보"} isFirst={true} />
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
                 <GridCol
                   title={"네임 스페이스 이름"}
                   content={DetailInfo.deploy.namespace_name}
@@ -249,11 +273,38 @@ function RequestDetail(props) {
                 <GridCol
                   title={"네임 스페이스 상태"}
                   content={
-                    DetailInfo.deploy.namespace_status === "Found"
-                      ? "활성화"
-                      : "비활성화"
+                    <DeployInfoBadge
+                      status={
+                        DetailInfo.deploy.namespace_status === "Found"
+                          ? "Present"
+                          : "Not Present"
+                      }
+                    />
                   }
                 />
+                <GridCol
+                  title={"서비스 이름"}
+                  content={DetailInfo.deploy.service_name}
+                  IsLast={true}
+                />
+              </Row>
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+                <GridCol
+                  title={"서비스 타입"}
+                  content={DetailInfo.deploy.service_type}
+                />
+                <GridCol
+                  title={"서비스 포트"}
+                  content={DetailInfo.deploy.deployment_port}
+                />
+                <GridCol
+                  title={"서비스 엔드포인트"}
+                  content={DetailInfo.deploy.service_external_ip}
+                  IsLast={true}
+                />
+              </Row>
+              <InfoHeader title={"앱 정보"} isFirst={false} />
+              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
                 <GridCol
                   title={"앱 이름"}
                   content={DetailInfo.deploy.deployment_name}
@@ -265,28 +316,17 @@ function RequestDetail(props) {
                       status={DetailInfo.deploy.deployment_status}
                     />
                   }
+                />
+                <GridCol
+                  title={"복제본 개수"}
+                  content={DetailInfo.deploy.replicas}
                   IsLast={true}
                 />
               </Row>
-              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
+              <Row className="mb-2 border-top" style={{ paddingTop: "0.5rem" }}>
                 <GridCol
-                  title={"서비스 이름"}
-                  content={DetailInfo.deploy.service_name}
-                />
-                <GridCol
-                  title={"서비스 타입"}
-                  content={DetailInfo.deploy.service_type}
-                />
-                <GridCol
-                  title={"서비스 포트"}
-                  content={DetailInfo.deploy.deployment_port}
-                  IsLast={true}
-                />
-              </Row>
-              <Row className="mb-2 border-top" style={{ paddingTop: "1rem" }}>
-                <GridCol
-                  title={"서비스 엔드포인트"}
-                  content={DetailInfo.deploy.service_external_ip}
+                  title={"이미지 명"}
+                  content={DetailInfo.deploy.image_name}
                   IsLast={true}
                 />
               </Row>
@@ -311,7 +351,7 @@ function RequestDetail(props) {
                     paddingTop: "1rem",
                   }}
                 >
-                  현재 배포된 컨테이너가 없습니다.
+                  현재 컨테이너 정보를 불러올 수 없습니다.
                 </p>
               ) : (
                 DetailInfo.deploy.pod_status.map((pod, index) => (

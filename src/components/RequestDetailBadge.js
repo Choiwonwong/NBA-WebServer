@@ -122,7 +122,11 @@ function DeployInfoBadge({ status }) {
   let variant = "secondary"; // 기본값
 
   // 처리 상태에 따라 적절한 색상을 선택
-  if (status === "Available" || status === "Progressing") {
+  if (
+    status === "Available" ||
+    status === "Progressing" ||
+    status === "Present"
+  ) {
     variant = "success";
   } else {
     variant = "danger";

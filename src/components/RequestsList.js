@@ -17,13 +17,9 @@ function RequestsList(props) {
     if (props.deployState === "success") {
       setBadgeState(["success", "성공"]);
     }
-    if (props.deployState === "failed" && props.tries === 5) {
-      setBadgeState(["danger", "실패"]);
-    }
-    if (props.provisionState === "failed" && props.tries === 5) {
-      setBadgeState(["danger", "실패"]);
-    }
-    if (props.processState === "failed" && props.tries === 5) {
+    if (
+      "failed" in [props.processState, props.provisionState, props.deployState]
+    ) {
       setBadgeState(["danger", "실패"]);
     }
     return badgeState;

@@ -5,18 +5,21 @@ function MetaInfoBadge({ status }) {
   let variant = "secondary"; // 기본값
 
   // 처리 상태에 따라 적절한 색상을 선택
-  if (status === "시작") {
+  if (status === "start") {
+    status = "시작";
     variant = "primary";
-  } else if (status === "실패") {
+  } else if (status === "failed") {
+    status = "실패";
     variant = "danger";
-  } else if (status === "성공") {
+  } else if (status === "success") {
+    status = "성공";
     variant = "success";
   } else if (status === null) {
     status = "대기";
     variant = "secondary";
   } else {
     status = "오류";
-    variant = "waring";
+    variant = "warning";
   }
 
   return (

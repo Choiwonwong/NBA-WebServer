@@ -34,7 +34,7 @@ function MainPage() {
         description={MainPageDesc.QuestListDesc}
         buttonType={"success"}
         buttonText={"Quest List"}
-        buttonLink={"/request-list"}
+        buttonLink={"/requests"}
         useButton={true}
       />
       <Divider />

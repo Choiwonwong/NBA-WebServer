@@ -16,9 +16,9 @@ function DocumentPage() {
     <>
       <Hero currentPage="DocumentPage" />
       <div className="px-4 my-2 text-center">
-        <h1 className="display-5 fw-bold lh-1 mb-4">Quest Documentation</h1>
+        <h1 className="display-5 fw-bold">Quest Documentation</h1>
       </div>
-      <hr />
+      {/* <hr /> */}
       <MDCard markdownContent={markdownContent} /> {/* Markdown 내용을 전달 */}
     </>
   );

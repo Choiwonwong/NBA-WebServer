@@ -46,10 +46,7 @@ function RequestListPage() {
           </p>
         </>
       ) : (
-        <Container
-          className="acordion-container mb-4"
-          style={{ marginBottom: "5rem" }}
-        >
+        <Container className="acordion-container">
           <Accordion>
             {requests.map((request) => (
               <RequestsList key={request.id} {...request} />

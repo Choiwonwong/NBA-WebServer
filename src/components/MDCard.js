@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 
 function MDCard({ markdownContent }) {
   return (
-    <Container className="my-5 docu-container">
+    <Container className="docu-container">
       <div
         className="mx-auto border rounded-3 shadow-lg "
         style={{

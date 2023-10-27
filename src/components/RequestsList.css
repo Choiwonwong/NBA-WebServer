@@ -1,5 +1,13 @@
 .acordion-container {
-    width: 90%;
+    width: 55%;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 1000px) {
+    .acordion-container {
+        width: 100%;
+    }
 }
 
 .card-button {

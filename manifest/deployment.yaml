@@ -12,8 +12,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: quest-web
-        quest: web
-        app: quest
+        quest: dummy_data
+        app: web
     spec:
       containers:
         - name: quest-web-ctn

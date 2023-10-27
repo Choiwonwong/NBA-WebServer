@@ -235,24 +235,36 @@ function RequestDetail(props) {
               {DetailInfo.ng_present === true ? (
                 <div>
                   <InfoHeader title={"가상머신 정보"} isFirst={false} />
-                  {DetailInfo.provision.ng_status.map((node, index) => (
-                    <Row
-                      key={index}
-                      className="border-top"
+                  {DetailInfo.provision.ng_status === "Not Found" ? (
+                    <p
                       style={{
-                        padding: "1rem",
-                        display: "flex",
-                        alignItems: "center",
+                        textAlign: "center",
+                        fontSize: 20,
+                        paddingTop: "1rem",
                       }}
                     >
-                      <GridArray title={"이름"} content={node.node_name} />
-                      <GridArray
-                        title={"상태"}
-                        content={<NDInfoBadge status={node.node_status} />}
-                        IsLast={true}
-                      />
-                    </Row>
-                  ))}
+                      현재 가상머신 정보를 불러올 수 없습니다.
+                    </p>
+                  ) : (
+                    DetailInfo.provision.ng_status.map((node, index) => (
+                      <Row
+                        key={index}
+                        className="border-top"
+                        style={{
+                          padding: "1rem",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <GridArray title={"이름"} content={node.node_name} />
+                        <GridArray
+                          title={"상태"}
+                          content={<NDInfoBadge status={node.node_status} />}
+                          IsLast={true}
+                        />
+                      </Row>
+                    ))
+                  )}
                 </div>
               ) : null}
             </Accordion.Body>
@@ -343,8 +355,7 @@ function RequestDetail(props) {
                 </Col>
               </Row>
 
-              {DetailInfo.deploy.pod_status === "Not Found" ||
-              DetailInfo.deploy.pod_status === null ? (
+              {DetailInfo.deploy.pod_status === "Not Found" ? (
                 <p
                   style={{
                     textAlign: "center",

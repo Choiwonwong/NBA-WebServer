@@ -15,6 +15,9 @@ function RequestListPage() {
     try {
       const response = await axios.get(`${ApiUrl.apiUrl}/requests/`);
       const reveredData = response.data.reverse();
+      if (reveredData.length === 0) {
+        setError("아직 요청이 하나도 없습니다.");
+      }
       setRequests(reveredData);
     } catch (e) {
       console.error(e);
@@ -35,24 +38,25 @@ function RequestListPage() {
       {/* <hr style={{ width: "50%", margin: "auto" }} /> */}
       {error ? (
         <>
-          <p className=" px-4 my-2 text-center" style={{ fontSize: 30 }}>
+          <p className=" px-4 my-2 text-center mb-4 " style={{ fontSize: 30 }}>
             <Badge bg="danger" style={{ marginRight: "1rem" }}>
               Failed
             </Badge>
             {error}
           </p>
         </>
-      ) : null}
-      <Container
-        className="acordion-container"
-        style={{ marginBottom: "5rem" }}
-      >
-        <Accordion>
-          {requests.map((request) => (
-            <RequestsList key={request.id} {...request} />
-          ))}
-        </Accordion>
-      </Container>
+      ) : (
+        <Container
+          className="acordion-container mb-4"
+          style={{ marginBottom: "5rem" }}
+        >
+          <Accordion>
+            {requests.map((request) => (
+              <RequestsList key={request.id} {...request} />
+            ))}
+          </Accordion>
+        </Container>
+      )}
     </>
   );
 }

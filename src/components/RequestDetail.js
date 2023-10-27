@@ -343,7 +343,8 @@ function RequestDetail(props) {
                 </Col>
               </Row>
 
-              {DetailInfo.deploy.pod_status === "Not Found" ? (
+              {DetailInfo.deploy.pod_status === "Not Found" ||
+              DetailInfo.deploy.pod_status.length === 0 ? (
                 <p
                   style={{
                     textAlign: "center",

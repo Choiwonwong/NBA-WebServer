@@ -17,7 +17,8 @@ function MetaInfoBadge({ status }) {
   } else if (status === null) {
     status = "대기";
     variant = "secondary";
-  } else if (status === "생략") {
+  } else if (status === "skip") {
+    status = "생략";
     variant = "secondary";
   } else {
     status = "오류";

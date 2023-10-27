@@ -354,7 +354,7 @@ function RequestDetail(props) {
                 >
                   현재 컨테이너 정보를 불러올 수 없습니다.
                 </p>
-              ) : (
+              ) : Array.isArray(DetailInfo.deploy.pod_status) ? (
                 DetailInfo.deploy.pod_status.map((pod, index) => (
                   <Row
                     key={index}
@@ -373,6 +373,16 @@ function RequestDetail(props) {
                     />
                   </Row>
                 ))
+              ) : (
+                <p
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    paddingTop: "1rem",
+                  }}
+                >
+                  현재 컨테이너 정보를 불러올 수 없습니다.
+                </p>
               )}
             </Accordion.Body>
           </Accordion.Item>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Badge from "react-bootstrap/Badge";
@@ -9,26 +9,23 @@ import Col from "react-bootstrap/Col";
 import { MetaInfoBadge } from "./RequestDetailBadge";
 
 function RequestsList(props) {
-  const [badgeState, setBadgeState] = useState(["primary", "진행"]);
   let navigate = useNavigate();
 
   function chooseBadgeBG() {
     if (props.deployState === "success") {
-      setBadgeState(["success", "성공"]);
+      return ["success", "성공"];
     }
     if (
       props.processState === "failed" ||
       props.provisionState === "failed" ||
       props.deployState === "failed"
     ) {
-      setBadgeState(["danger", "실패"]);
+      return ["danger", "실패"];
     }
-    return badgeState;
+    return ["primary", "진행"];
   }
 
-  useEffect(() => {
-    chooseBadgeBG();
-  });
+  useEffect(() => {}, []);
 
   function formatDate(dateString) {
     const options = {
@@ -41,6 +38,8 @@ function RequestsList(props) {
     };
     return new Date(dateString).toLocaleString(undefined, options);
   }
+
+  const badgeState = chooseBadgeBG();
 
   return (
     <Accordion.Item eventKey={props.id}>

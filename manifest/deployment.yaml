@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: quest-web
-        quest: dummy_data
+        quest: dummydata
         app: web
     spec:
       containers:

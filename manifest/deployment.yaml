@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: quest-web-ctn
-          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/quest-web:0.0.15
+          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/quest-web:0.0.16
           ports:
             - name: http
               containerPort: 80

@@ -38,7 +38,6 @@ function RequestCheck(props) {
         );
 
         if (response?.status === 200) {
-          // 1. 정상 요청일 때
           setIsLoading(false);
           setBadgeState(response.data.result);
           setFileCheckResult(response.data.message);
@@ -46,20 +45,32 @@ function RequestCheck(props) {
           props.getQuestYaml(selectedFile);
           props.getProcessedQuest(yaml.dump(response.data.userQuestYaml));
         } else {
-          // 3. 서버가 400 메시지를 보낼 때
           setIsLoading(false);
           setBadgeState("danger");
           setFileCheckResult("서버에서 잘못된 요청을 받았습니다.");
         }
       } catch (error) {
         console.log(error);
-        let errorMessage = "서버와 연결할 수 없습니다. 잠시 기다려주세요";
-        if (error.status === 400) {
-          errorMessage = error.response.data.detail.message;
+
+        if (error.response) {
+          if (error.response.status === 400) {
+            let errorMessage = error.response.data.detail.message;
+            setIsLoading(false);
+            setBadgeState("danger");
+            setFileCheckResult(errorMessage);
+          } else {
+            let errorMessage = "서버 내부 오류입니다.";
+            setIsLoading(false);
+            setBadgeState("danger");
+            setFileCheckResult(errorMessage);
+          }
+        } else {
+          // The error doesn't have a response, so it's a connection error
+          let errorMessage = "서버와 연결할 수 없습니다. 잠시 기다려주세요";
+          setIsLoading(false);
+          setBadgeState("danger");
+          setFileCheckResult(errorMessage);
         }
-        setIsLoading(false);
-        setBadgeState("danger");
-        setFileCheckResult(errorMessage);
       }
     }
   };

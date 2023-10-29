@@ -52,12 +52,14 @@ function RequestCheck(props) {
           setFileCheckResult("서버에서 잘못된 요청을 받았습니다.");
         }
       } catch (error) {
-        // Handle network or server-related errors
+        console.log(error);
+        let errorMessage = "서버와 연결할 수 없습니다. 잠시 기다려주세요";
+        if (error.status === 400) {
+          errorMessage = error.response.data.detail.message;
+        }
         setIsLoading(false);
         setBadgeState("danger");
-        setFileCheckResult(
-          "서버에 연결할 수 없습니다. 나중에 다시 시도해주세요."
-        );
+        setFileCheckResult(errorMessage);
       }
     }
   };

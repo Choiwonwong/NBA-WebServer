@@ -235,7 +235,8 @@ function RequestDetail(props) {
               {DetailInfo.ng_present === true ? (
                 <div>
                   <InfoHeader title={"가상머신 정보"} isFirst={false} />
-                  {DetailInfo.provision.ng_status === "Not Found" ? (
+                  {DetailInfo.provision.ng_status === "Not Found" ||
+                  DetailInfo.provision.ng_status === null ? (
                     <p
                       style={{
                         textAlign: "center",
@@ -355,7 +356,8 @@ function RequestDetail(props) {
                 </Col>
               </Row>
 
-              {DetailInfo.deploy.pod_status === "Not Found" ? (
+              {DetailInfo.deploy.pod_status === "Not Found" ||
+              DetailInfo.deploy.pod_status === null ? (
                 <p
                   style={{
                     textAlign: "center",

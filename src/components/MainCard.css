@@ -10,8 +10,8 @@
     justify-content: center;
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1300px) {
     .card-container {
-        width: 60%;
+        width: 50%;
     }
 }

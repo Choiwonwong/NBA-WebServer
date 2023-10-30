@@ -1,6 +1,9 @@
-import Markdown from "react-markdown";
-import "./MDCard.css";
+import React from "react";
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coyWithoutShadows } from "react-syntax-highlighter/dist/esm/styles/prism";
+import ReactMarkdown from "react-markdown";
 import { Container } from "react-bootstrap";
+import "./MDCard.css";
 
 function MDCard({ markdownContent }) {
   return (
@@ -16,7 +19,28 @@ function MDCard({ markdownContent }) {
           paddingBottom: "3rem",
         }}
       >
-        <Markdown>{markdownContent}</Markdown>
+        <ReactMarkdown
+          children={markdownContent}
+          components={{
+            code(props) {
+              const { children, className, node, ...rest } = props;
+              const match = "yaml";
+              return match ? (
+                <SyntaxHighlighter
+                  {...rest}
+                  children={String(children).replace(/\n$/, "")}
+                  style={coyWithoutShadows}
+                  language={match}
+                  PreTag="div"
+                />
+              ) : (
+                <code {...rest} className={className}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        />
       </div>
     </Container>
   );

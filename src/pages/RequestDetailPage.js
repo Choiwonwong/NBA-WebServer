@@ -36,7 +36,6 @@ function RequestDetailPage() {
       const reveredData = response.data;
       setRequestsDetailInfo(reveredData);
       setIsDataFetched(true); // 데이터를 불러왔음을 표시
-      console.log(reveredData);
     } catch (e) {
       console.error(e);
       console.error("Error fetching request detail:", e);

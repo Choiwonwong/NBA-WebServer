@@ -117,12 +117,12 @@ AWS_지역_명: 도쿄
 배포_요청:
   네임_스페이스_이름: default
   애플리케이션:
-    앱_이름: quest-app
+    이름: quest-app
     이미지_이름: example:latest
     포트_번호: "80"
     복제본_개수: "3"
   서비스:
-    서비스_이름: quest-service
+    이름: quest-service
     서비스_타입: "[변경 불가]-로드밸런서"
 ```
 
@@ -157,12 +157,12 @@ AWS_인증정보:
 배포_요청:
   네임스페이스이름: example # 기본값: default
   애플리케이션:
-    앱_이름: example # 기본값: quest-app
+    이름: example # 기본값: quest-app
     이미지_이름: nginx:latest
     포트_번호: 80
     복제본_개수: 3 # 기본값: 3
   서비스:
-    서비스_이름: example # 기본값: quest-service
+    이름: example # 기본값: quest-service
   환경_변수: # 추가 변수
     - 이름: exmple-key
       값: example-value
@@ -196,12 +196,12 @@ AWS_지역_명: 도쿄
 배포_요청:
   네임_스페이스_이름: example
   애플리케이션:
-    앱_이름: quest-app
+    이름: quest-app
     이미지_이름: nginx:latest
     포트_번호: "80"
     복제본_개수: "3"
   서비스:
-    서비스_이름: quest-service
+    이름: quest-service
     서비스_타입: "[변경 불가]-로드밸런서"
   환경_변수:
     - 환경_변수_명: exmple-key
@@ -233,12 +233,12 @@ AWS_인증정보:
 배포_요청:
   네임스페이스이름: example # 기본값: default
   애플리케이션:
-    앱_이름: example # 기본값: quest-app
+    이름: example # 기본값: quest-app
     이미지_이름: nginx:latest
     포트_번호: 80
     복제본_개수: 3 # 기본값: 3
   서비스:
-    서비스_이름: example # 기본값: quest-service
+    이름: example # 기본값: quest-service
   환경_변수: # 추가 변수
     - 이름: exmple-key
       값: example-value
@@ -264,12 +264,12 @@ AWS_지역_명: 도쿄
 배포_요청:
   네임_스페이스_이름: example
   애플리케이션:
-    앱_이름: quest-app
+    이름: quest-app
     이미지_이름: nginx:latest
     포트_번호: "80"
     복제본_개수: "3"
   서비스:
-    서비스_이름: quest-service
+    이름: quest-service
     서비스_타입: "[변경 불가]-로드밸런서"
   환경_변수:
     - 환경_변수_명: exmple-key

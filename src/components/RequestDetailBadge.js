@@ -40,6 +40,8 @@ function EKSInfoBadge({ status }) {
     variant = "success";
   } else if (status === "CREATING") {
     variant = "primary";
+  } else if (status === "DELETING") {
+    variant = "warning";
   } else {
     variant = "danger";
   }

@@ -221,12 +221,6 @@ function RequestDetail(props) {
                   content={DetailInfo.provision.dataplane_type + " 기반"}
                 />
                 <GridCol
-                  title={"데이터플레인 상태"}
-                  content={
-                    <DPInfoBadge status={DetailInfo.provision.dp_status} />
-                  }
-                />
-                <GridCol
                   title={"가상머신 개수"}
                   content={DetailInfo.provision.ng_current_count}
                   IsLast={true}

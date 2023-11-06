@@ -13,7 +13,7 @@
 
 .log-container {
     width: 95%;
-    height: 100vh;
+    height: 70vh;
     margin: 1.5rem auto;
     padding-left: 0.5rem;
     overflow-y: auto;
@@ -24,7 +24,7 @@
 
 @media (max-width: 1300px) {
     .log-container {
-        height: 100vh;
+        height: 80vh;
         width: 65%;
     }
 }

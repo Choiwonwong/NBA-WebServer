@@ -53,33 +53,6 @@ function EKSInfoBadge({ status }) {
   );
 }
 
-function DPInfoBadge({ status }) {
-  let variant = "secondary"; // 기본값
-
-  // 처리 상태에 따라 적절한 색상을 선택
-  if (status === "ACTIVE") {
-    variant = "success";
-  } else if (status === "CREATING") {
-    status = "생성 중";
-    variant = "primary";
-  } else if (status === "CREATE_FAILED") {
-    status = "생성 실패";
-    variant = "danger";
-  } else if (status === "DEGRADED") {
-    status = "저하됨";
-    variant = "warning";
-  } else {
-    status = "오류";
-    variant = "danger";
-  }
-
-  return (
-    <Badge pill bg={variant} style={{ fontSize: 15, marginTop: "0.2rem" }}>
-      {status}
-    </Badge>
-  );
-}
-
 function NDInfoBadge({ status }) {
   let variant = "secondary"; // 기본값
 
@@ -145,7 +118,6 @@ function DeployInfoBadge({ status }) {
 export {
   MetaInfoBadge,
   EKSInfoBadge,
-  DPInfoBadge,
   NDInfoBadge,
   PodInfoBadge,
   DeployInfoBadge,

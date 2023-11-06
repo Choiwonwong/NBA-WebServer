@@ -17,14 +17,14 @@ spec:
     spec:
       containers:
         - name: quest-web-ctn
-          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/quest-web:0.1.5
+          image: 622164100401.dkr.ecr.ap-northeast-1.amazonaws.com/quest-web:0.1.6
           ports:
             - name: http
               containerPort: 80
           resources:
             requests:
-              cpu: 50m
-              memory: 100Mi
+              cpu: 5m
+              memory: 10Mi
             limits:
-              cpu: 100m
-              memory: 200Mi
+              cpu: 10m
+              memory: 20Mi

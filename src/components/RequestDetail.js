@@ -7,7 +7,6 @@ import { Badge } from "react-bootstrap";
 import {
   MetaInfoBadge,
   EKSInfoBadge,
-  DPInfoBadge,
   NDInfoBadge,
   PodInfoBadge,
   DeployInfoBadge,

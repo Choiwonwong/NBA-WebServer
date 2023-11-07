@@ -54,7 +54,8 @@ function ServiceLog(props) {
         disabled={
           props.progress === "처리" ||
           isLoading ||
-          (props.progress === "배포" && props.deployState !== "start")
+          (props.progress === "배포" && props.deployState !== "start") ||
+          props.provisionState === "failed"
             ? true
             : false
         }

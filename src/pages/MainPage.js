@@ -37,8 +37,6 @@ function MainPage() {
         buttonLink={"/requests"}
         useButton={true}
       />
-      <Divider />
-      <MainCard title="NBA Team 소개" description={MainPageDesc.TeamDesc} />
     </>
   );
 }

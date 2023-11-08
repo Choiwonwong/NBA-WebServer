@@ -80,6 +80,7 @@ function RequestDetailPage() {
             <ServiceLog
               id={id}
               progress={requestsMetaInfo.progress}
+              provisionState={requestsMetaInfo.provisionState}
               deployState={requestsMetaInfo.deployState}
             />
           </>
